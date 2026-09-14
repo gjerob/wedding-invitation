@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react"
-import storyImage from "./images/our-story.jpg"
 import { isSupabaseConfigured, supabase } from "./lib/supabase"
 
 type ToastState = {
@@ -347,7 +346,7 @@ function OurStory() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
             <img
-              src={storyImage}
+              src="/our-story.jpg"
               alt="Couple walking through lush greenery"
               className="w-full h-[480px] object-cover relative z-10"
             />
