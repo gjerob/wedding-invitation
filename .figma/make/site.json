@@ -1,0 +1,10 @@
+{
+  "description": "Create a stunning wedding website featuring a welcome section, RSVP form, and a personalized couple's story, perfect for engaged couples planning their special day.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
