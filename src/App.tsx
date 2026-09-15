@@ -614,7 +614,7 @@ function Footer() {
     <footer className="bg-[#4a3728] text-[#d4b896] py-14 px-6 text-center">
       <p className="font-display italic text-3xl mb-2">Aileen &amp; Christian Jade</p>
       <p className="font-body text-xs tracking-[0.25em] uppercase text-[#d4b896]/60 mb-6">
-        February 14, 2026 · Cebu City
+        March 06, 2027 · Bais City
       </p>
       <div className="flex items-center justify-center gap-4 mb-8">
         <div className="flex-1 max-w-20 h-px bg-[#d4b896]/30" />
@@ -623,7 +623,7 @@ function Footer() {
         </svg>
         <div className="flex-1 max-w-20 h-px bg-[#d4b896]/30" />
       </div>
-      <p className="font-body text-xs text-[#d4b896]/40 tracking-widest">#AileenAndCJ2026</p>
+      <p className="font-body text-xs text-[#d4b896]/40 tracking-widest">#AileenAndCJ2027</p>
     </footer>
   )
 }
