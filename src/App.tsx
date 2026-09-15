@@ -171,7 +171,7 @@ function Hero() {
           alt="Couple walking on a beach in the Philippines"
           className="w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a1a0e]/55 via-[#3b2416]/40 to-[#1a0e06]/70" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#2a1a0e]/30 via-[#3b2416]/20 to-[#1a0e06]/70" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#faf6f0] to-transparent" />
       </div>
 
