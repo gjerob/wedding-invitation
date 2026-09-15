@@ -348,7 +348,7 @@ function OurStory() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
             <img
-              src="img/our-story.jpg"
+              src="https://images.unsplash.com/photo-1789435588214-1a0e39c5ec1b?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
               alt="Couple walking through lush greenery"
               className="w-full h-[480px] object-cover relative z-10"
             />
