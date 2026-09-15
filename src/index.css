@@ -71,7 +71,7 @@ body {
   font-size: 0.7rem;
   font-weight: 500;
   text-transform: uppercase;
-  color: #4a3728;
+  color: #b89a6a;
   transition: color 0.25s;
 }
 .nav-link::after {
@@ -81,14 +81,14 @@ body {
   left: 0;
   width: 0;
   height: 1px;
-  background: #b89a6a;
+  background: #d4b896;
   transition: width 0.3s ease;
 }
 .nav-link:hover::after {
   width: 100%;
 }
 .nav-link:hover {
-  color: #b89a6a;
+  color: #d4b896;
 }
 
 input, select, textarea {

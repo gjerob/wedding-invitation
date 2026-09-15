@@ -102,7 +102,7 @@ function Nav() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a
           href="#hero"
-          className="font-display text-xl italic tracking-wide text-[#4a3728] hover:text-[#b89a6a] transition-colors"
+          className="font-display text-xl italic tracking-wide text-[#b89a6a] hover:text-[#d4b896] transition-colors"
         >
           A &amp; CJ
         </a>
@@ -116,7 +116,7 @@ function Nav() {
         </div>
 
         <button
-          className="md:hidden text-[#4a3728] hover:text-[#b89a6a] transition-colors"
+          className="md:hidden text-[#b89a6a] hover:text-[#d4b896] transition-colors"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -167,7 +167,7 @@ function Hero() {
     >
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1789212883715-0b06581d1791?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1789386758040-bf5228996745?q=80&w=2016&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt="Couple walking on a beach in the Philippines"
           className="w-full h-full object-cover object-center"
         />
@@ -205,7 +205,9 @@ function Hero() {
             March 06, 2027
           </p>
           <p className="font-body text-white/70 tracking-[0.25em] text-xs uppercase">
-            Cebu City, Philippines
+            Tambis Road, JMPV Glad Subdivision, 
+            <br />
+            Barangay Talungon, Bais, Philippines, 6202
           </p>
         </div>
 
@@ -346,7 +348,7 @@ function OurStory() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
             <img
-              src="/our-story.jpg"
+              src="img/our-story.jpg"
               alt="Couple walking through lush greenery"
               className="w-full h-[480px] object-cover relative z-10"
             />
