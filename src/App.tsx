@@ -207,7 +207,7 @@ function Hero() {
           <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80">
             Tambis Road, JMPV Glad Subdivision,
             <br />
-            Barangay Talungon, Bais, Philippines, 6202
+            Barangay Talungon, Bais City
           </p>
         </div>
 
