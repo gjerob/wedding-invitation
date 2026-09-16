@@ -165,17 +165,17 @@ function Hero() {
       id="hero"
       className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden"
     >
-      <div className="absolute inset-0">
+      <div className="absolute inset-0 overflow-hidden">
         <img
           src="https://ik.imagekit.io/iemgj7wsu/hero-bg.jpg"
           alt="Couple walking on a beach in the Philippines"
-          className="w-full h-full object-cover object-center"
+          className="hero-kenburns h-full w-full object-cover object-center"
         />
         <div className="absolute inset-0 bg-gradient-to-b from-[#2a1a0e]/30 via-[#3b2416]/20 to-[#1a0e06]/70" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#faf6f0] to-transparent" />
       </div>
 
-      <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
+      <div className="hero-fade relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
         <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f1d8a8]">
           Together Forever
         </p>
@@ -219,7 +219,7 @@ function Hero() {
         </a>
       </div>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
+      <div className="hero-float absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#d4b896" strokeWidth="1.5">
           <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
         </svg>
