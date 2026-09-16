@@ -167,7 +167,7 @@ function Hero() {
     >
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="img/hero-bg.jpg"
+           src="/img/hero-bg.jpg"
           alt="Couple walking on a beach in the Philippines"
           className="hero-kenburns h-full w-full object-cover object-center"
         />
