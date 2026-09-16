@@ -102,14 +102,14 @@ function Nav() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a
           href="#hero"
-          className="font-display text-xl italic tracking-wide text-[#b89a6a] hover:text-[#d4b896] transition-colors"
+          className="font-display text-xl italic tracking-wide text-[#f0d7b0] hover:text-[#f9e7ce] transition-colors"
         >
           A &amp; CJ
         </a>
 
         <div className="hidden md:flex gap-8">
           {links.map((l) => (
-            <a key={l.label} href={l.href} className="nav-link">
+            <a key={l.label} href={l.href} className="nav-link text-[#f0d7b0] hover:text-[#f9e7ce]">
               {l.label}
             </a>
           ))}
@@ -123,7 +123,7 @@ function Nav() {
           <svg
             width="24"
             height="24"
-            viewBox="0 0 24 24"
+            viewBox="0 0 24 24"git 
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
@@ -167,7 +167,7 @@ function Hero() {
     >
       <div className="absolute inset-0">
         <img
-          src="https://images.unsplash.com/photo-1789386758040-bf5228996745?q=80&w=2016&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="img/hero-bg.jpg"
           alt="Couple walking on a beach in the Philippines"
           className="w-full h-full object-cover object-center"
         />
@@ -348,7 +348,7 @@ function OurStory() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
             <img
-              src="https://images.unsplash.com/photo-1789435588214-1a0e39c5ec1b?q=80&w=2126&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+              src="img/our-story.jpg"
               alt="Couple walking through lush greenery"
               className="w-full h-[480px] object-cover relative z-10"
             />
