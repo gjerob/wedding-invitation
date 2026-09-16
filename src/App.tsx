@@ -93,11 +93,10 @@ function Nav() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled
           ? "bg-[#faf6f0]/95 backdrop-blur shadow-sm py-3"
           : "bg-transparent py-5"
-      }`}
+        }`}
     >
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a
@@ -138,9 +137,8 @@ function Nav() {
       </div>
 
       <div
-        className={`md:hidden bg-[#faf6f0]/98 backdrop-blur overflow-hidden transition-all duration-300 ${
-          menuOpen ? "max-h-40 border-t border-[#e8dfd4]" : "max-h-0"
-        }`}
+        className={`md:hidden bg-[#faf6f0]/98 backdrop-blur overflow-hidden transition-all duration-300 ${menuOpen ? "max-h-40 border-t border-[#e8dfd4]" : "max-h-0"
+          }`}
       >
         <div className="flex flex-col gap-1 px-6 py-4">
           {links.map((l) => (
@@ -167,7 +165,7 @@ function Hero() {
     >
       <div className="absolute inset-0 overflow-hidden">
         <img
-           src="/img/hero-bg.jpg"
+          src="/img/hero-bg.jpg"
           alt="Couple walking on a beach in the Philippines"
           className="hero-kenburns h-full w-full object-cover object-center"
         />
@@ -370,16 +368,14 @@ function OurStory() {
             {milestones.map((m, i) => (
               <div
                 key={m.year}
-                className={`relative flex flex-col md:flex-row gap-8 md:gap-12 ${
-                  i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                }`}
+                className={`relative flex flex-col md:flex-row gap-8 md:gap-12 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                  }`}
               >
                 <div className="absolute left-4 md:left-1/2 top-1 w-3 h-3 rounded-full bg-[#b89a6a] border-2 border-[#faf6f0] md:-translate-x-1/2 z-10" />
 
                 <div
-                  className={`pl-12 md:pl-0 md:w-1/2 ${
-                    i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"
-                  }`}
+                  className={`pl-12 md:pl-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"
+                    }`}
                 >
                   <span className="font-body text-[#b89a6a] tracking-[0.2em] text-xs uppercase">
                     {m.year}
@@ -520,11 +516,10 @@ function RSVP() {
                   ].map((opt) => (
                     <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
                       <span
-                        className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${
-                          form.attendance === opt.value
+                        className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${form.attendance === opt.value
                             ? "border-[#b89a6a] bg-[#b89a6a]"
                             : "border-[#d4b896] group-hover:border-[#b89a6a]"
-                        }`}
+                          }`}
                       >
                         {form.attendance === opt.value && (
                           <span className="w-1.5 h-1.5 rounded-full bg-white" />
