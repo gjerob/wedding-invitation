@@ -167,7 +167,7 @@ function Hero() {
     >
       <div className="absolute inset-0 overflow-hidden">
         <img
-          src="https://ik.imagekit.io/iemgj7wsu/hero-bg.jpg"
+          src="img/hero-bg.jpg"
           alt="Couple walking on a beach in the Philippines"
           className="hero-kenburns h-full w-full object-cover object-center"
         />
@@ -348,7 +348,7 @@ function OurStory() {
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
             <img
-              src="https://ik.imagekit.io/iemgj7wsu/our-story.jpg"
+              src="/img/our-story.jpg"
               alt="Couple walking through lush greenery"
               className="w-full h-[480px] object-cover relative z-10"
             />
