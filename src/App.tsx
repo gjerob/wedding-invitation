@@ -123,7 +123,7 @@ function Nav() {
           <svg
             width="24"
             height="24"
-            viewBox="0 0 24 24"git 
+            viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
             strokeWidth="1.5"
@@ -176,36 +176,36 @@ function Hero() {
       </div>
 
       <div className="relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
-        <p className="font-body text-[#d4b896] tracking-[0.35em] text-xs uppercase mb-6">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f1d8a8]">
           Together Forever
         </p>
 
-        <h1 className="font-display font-light text-white leading-none mb-4">
-          <span className="block text-6xl md:text-8xl lg:text-9xl italic">
+        <h1 className="mb-4 font-display font-light leading-none text-white">
+          <span className="block text-6xl italic md:text-8xl lg:text-9xl">
             Aileen
           </span>
-          <span className="block text-[#d4b896] font-body font-light tracking-[0.4em] text-sm md:text-base my-3 uppercase">
+          <span className="my-3 block text-sm font-body font-light uppercase tracking-[0.4em] text-[#f1d8a8] md:text-base">
             &amp;
           </span>
-          <span className="block text-6xl md:text-8xl lg:text-9xl italic">
+          <span className="block text-6xl italic md:text-8xl lg:text-9xl">
             Christian Jade
           </span>
         </h1>
 
-        <div className="flex items-center gap-4 my-8 w-56">
-          <div className="flex-1 h-px bg-[#d4b896]/60" />
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#d4b896" opacity="0.85">
+        <div className="my-8 flex w-56 items-center gap-4">
+          <div className="h-px flex-1 bg-[#f1d8a8]/70" />
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f1d8a8" opacity="0.9">
             <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
           </svg>
-          <div className="flex-1 h-px bg-[#d4b896]/60" />
+          <div className="h-px flex-1 bg-[#f1d8a8]/70" />
         </div>
 
         <div className="text-center">
-          <p className="font-display text-[#d4b896] text-2xl md:text-3xl italic font-light mb-1">
+          <p className="mb-1 font-display text-2xl font-light italic text-[#f7e7cb] md:text-3xl">
             March 06, 2027
           </p>
-          <p className="font-body text-white/70 tracking-[0.25em] text-xs uppercase">
-            Tambis Road, JMPV Glad Subdivision, 
+          <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80">
+            Tambis Road, JMPV Glad Subdivision,
             <br />
             Barangay Talungon, Bais, Philippines, 6202
           </p>
@@ -213,7 +213,7 @@ function Hero() {
 
         <a
           href="#rsvp"
-          className="mt-10 inline-block border border-[#d4b896]/70 text-[#d4b896] font-body tracking-[0.25em] text-xs uppercase px-8 py-3 hover:bg-[#d4b896] hover:text-[#2a1a0e] transition-all duration-300"
+          className="mt-10 inline-block border border-[#f1d8a8]/80 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#f1d8a8] transition-all duration-300 hover:bg-[#f1d8a8] hover:text-[#2a1a0e]"
         >
           RSVP
         </a>
