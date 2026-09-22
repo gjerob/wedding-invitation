@@ -403,6 +403,90 @@ It was only after graduation that their friendship slowly blossomed into love. W
   )
 }
 
+const guestList = [
+  "AJ Cadayuna",
+  "Aljade Apostol",
+  "Alju Cadayuna",
+  "Alpha Venadas",
+  "Alyssa Nasuli",
+  "Angel Genobiagon",
+  "Reymund Cadayday",
+  "Arjie Genobiagon",
+  "Catalina Barerra",
+  "Chard Densky",
+  "Christopher John Vergara",
+  "Chrisel Baile",
+  "Dave Arapoc",
+  "Dave Delas Verlas",
+  "Desie Abrasado",
+  "Dwayne Pionela",
+  "Eduardo Barrera",
+  "Elmer Barerra",
+  "Evelyn Verduzola",
+  "Francis Zunega",
+  "Fritz Am Colina",
+  "Genoviva Barerra",
+  "Grace Carnicer",
+  "Ian Jade Abrasado",
+  "Immanuel Genobiagon",
+  "Jemmah Jane Venadas",
+  "Jeremias Genobiagon",
+  "Jeriel Genobiagon",
+  "Jerobel Genobiagon",
+  "Johnsent Verduzola",
+  "Jomar Barerra",
+  "Joy Barrera",
+  "Joy Martinez",
+  "Joyce Barerra",
+  "Karil Tulop",
+  "Maricel Zunega",
+  "Maricho Bolado",
+  "Mary Jane Cadayuna",
+  "Melbert Barerra",
+  "Nikki Densky",
+  "Paul Anthony Barrera",
+  "Peter Paul Barerra",
+  "Reggie Cabugnason",
+  "Reyden Carnicer",
+  "Riza Barerra",
+  "Robella Genobiagon",
+  "Rodrigo Verduzola",
+  "Rocio Cancino",
+  "Sheila Mae Corong",
+  "Elaicon Anana",
+  "Jam Genobiagon",
+  "Juryam Cadayuna",
+  "Myles Carnicer",
+  "Faye Marie Cabugnason",
+  "Alphia Jemimah Venadas",
+  "Carleen Bongabong",
+  "Nikko Bongabong",
+  "Ainie Abuso",
+  "Isok Abuso",
+  "Judilyn Naje",
+  "Jun Dolormente",
+  "Anthon Lie Kadile",
+  "Bernadeth Manila Amiler",
+  "Dangelyn Acero Solano",
+  "Carlo Solano",
+  "Dan Anthony Palagtiw",
+  "Kayla Marie Palagtiw",
+  "Evelyn Calumpang Benlot",
+  "Benlot",
+  "Rubie Acero",
+  "Rubie's Husband",
+  "Arleen",
+  "Vince",
+  "Rechie Rich Apostol",
+  "Jeremias Queue",
+  "Rosalie Calumpang",
+  "Jean Mabido",
+  "Mersha Rose",
+  "Honey Pearl Reyes",
+  "Patrick Salvanera",
+  "Marilyn Genobiagon",
+]
+
 function RSVP() {
   const [form, setForm] = useState({
     name: "",
@@ -425,9 +509,18 @@ function RSVP() {
     setError("")
 
     try {
+      const normalizedName = form.name.trim()
+      const nameMatchesGuestList = guestList.some(
+        (guestName) => guestName.toLowerCase() === normalizedName.toLowerCase(),
+      )
+
+      if (!nameMatchesGuestList) {
+        throw new Error("Please choose your name from the guest list.")
+      }
+
       if (supabase) {
         const { error: insertError } = await supabase.from("rsvps").insert({
-          name: form.name,
+          name: normalizedName,
           email: form.email,
           guests: Number(form.guests),
           attendance: form.attendance,
@@ -443,7 +536,11 @@ function RSVP() {
       setSubmitted(true)
     } catch (submitError) {
       console.error("RSVP submit error:", submitError)
-      setError("We could not save your RSVP right now. Please try again in a moment.")
+      setError(
+        submitError instanceof Error && submitError.message
+          ? submitError.message
+          : "We could not save your RSVP right now. Please try again in a moment.",
+      )
     } finally {
       setSaving(false)
     }
@@ -470,6 +567,29 @@ function RSVP() {
           <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
             Please let us know by <strong className="font-medium text-[#4a3728]">December 20, 2026</strong> whether you'll be joining us for our special day.
           </p>
+
+          <div className="mt-8 rounded-[1.5rem] border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)]">
+            <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
+              <span className="text-lg">❧</span>
+              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
+                Note
+              </p>
+            </div>
+
+            <div className="space-y-4 text-left italic text-[#5d4134]">
+              <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                “If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!”
+              </blockquote>
+
+              <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                “While we absolutely adore your little ones, we’ve chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you’ll understand and take this as an opportunity to enjoy a well-deserved night out with us!”
+              </blockquote>
+
+              <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                “Due to our venue’s capacity, we’re only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you’ll understand our need to keep our celebration intimate and meaningful.”
+              </blockquote>
+            </div>
+          </div>
         </div>
 
         {submitted ? (
@@ -490,15 +610,24 @@ function RSVP() {
             className="bg-[#faf6f0] border border-[#e8dfd4] p-10 md:p-14 space-y-8"
           >
             <div>
-              <label className={labelClass}>Full Name</label>
+              <label className={labelClass}>Search Your Name</label>
               <input
+                list="guest-name-options"
                 type="text"
                 required
-                placeholder="Your full name"
+                placeholder="Start typing your name..."
                 value={form.name}
                 onChange={(e) => update("name", e.target.value)}
                 className={inputClass}
               />
+              <datalist id="guest-name-options">
+                {guestList.map((guestName) => (
+                  <option key={guestName} value={guestName} />
+                ))}
+              </datalist>
+              <p className="mt-2 font-body text-[11px] uppercase tracking-[0.12em] text-[#7a5c48]">
+                Select your name from the guest list
+              </p>
             </div>
 
             <div>
@@ -513,49 +642,32 @@ function RSVP() {
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-8">
-              <div>
-                <label className={labelClass}>Attendance</label>
-                <div className="flex flex-col gap-2 mt-2">
-                  {[
-                    { value: "attending", label: "Joyfully Attending" },
-                    { value: "not-attending", label: "Regretfully Decline" },
-                  ].map((opt) => (
-                    <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
-                      <span
-                        className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${form.attendance === opt.value
-                            ? "border-[#b89a6a] bg-[#b89a6a]"
-                            : "border-[#d4b896] group-hover:border-[#b89a6a]"
-                          }`}
-                      >
-                        {form.attendance === opt.value && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                        )}
-                      </span>
-                      <span
-                        className="font-body text-xs text-[#7a5c48]"
-                        onClick={() => update("attendance", opt.value)}
-                      >
-                        {opt.label}
-                      </span>
-                    </label>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <label className={labelClass}>Number of Guests</label>
-                <select
-                  value={form.guests}
-                  onChange={(e) => update("guests", e.target.value)}
-                  className={`${inputClass} cursor-pointer`}
-                >
-                  {["1", "2", "3", "4"].map((n) => (
-                    <option key={n} value={n}>
-                      {n} {n === "1" ? "Guest" : "Guests"}
-                    </option>
-                  ))}
-                </select>
+            <div>
+              <label className={labelClass}>Attendance</label>
+              <div className="flex flex-col gap-2 mt-2">
+                {[
+                  { value: "attending", label: "Joyfully Attending" },
+                  { value: "not-attending", label: "Regretfully Decline" },
+                ].map((opt) => (
+                  <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
+                    <span
+                      className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${form.attendance === opt.value
+                          ? "border-[#b89a6a] bg-[#b89a6a]"
+                          : "border-[#d4b896] group-hover:border-[#b89a6a]"
+                        }`}
+                    >
+                      {form.attendance === opt.value && (
+                        <span className="w-1.5 h-1.5 rounded-full bg-white" />
+                      )}
+                    </span>
+                    <span
+                      className="font-body text-xs text-[#7a5c48]"
+                      onClick={() => update("attendance", opt.value)}
+                    >
+                      {opt.label}
+                    </span>
+                  </label>
+                ))}
               </div>
             </div>
 
