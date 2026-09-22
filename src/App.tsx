@@ -129,6 +129,7 @@ function Nav() {
   const links = [
     { label: "Our Story", href: "#story" },
     { label: "Wedding", href: "#wedding" },
+    { label: "Dress Code", href: "#dress-code" },
     { label: "RSVP", href: "#rsvp" },
   ]
 
@@ -345,6 +346,70 @@ function WeddingDetails() {
               </div>
             </Reveal>
           ))}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function DressCode() {
+  return (
+    <section id="dress-code" className="bg-[#faf6f0] py-24 px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-14">
+          <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
+            Dress Code
+          </p>
+          <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
+            Formal Elegance
+          </h2>
+          <div className="divider-floral justify-center w-48 mx-auto">
+            <span className="text-[#b89a6a] text-lg">✦</span>
+          </div>
+        </div>
+
+        <div className="bg-[#f2ebe0] border border-[#e8dfd4] p-8 md:p-12 text-center">
+          <p className="font-display italic text-[#4a3728] text-3xl md:text-4xl mb-8">
+            Garden Formal / Evening Chic
+          </p>
+
+          <div className="mb-8 flex w-full overflow-hidden rounded-full border border-[#d4b896]/80 bg-[#faf6f0] p-2 shadow-[0_10px_25px_rgba(74,55,40,0.03)]">
+            <div className="h-16 flex-1 rounded-full bg-[#b3bae6]" />
+            <div className="h-16 flex-1 rounded-full bg-[#feebc0]" />
+            <div className="h-16 flex-1 rounded-full bg-[#feaaaa]" />
+            <div className="h-16 flex-1 rounded-full bg-[#ffaf74]" />
+            <div className="h-16 flex-1 rounded-full bg-[#b1ae81]" />
+            <div className="h-16 flex-1 rounded-full bg-[#bbaccb]" />
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+            <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
+              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
+                For Women
+              </p>
+              <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+                Elegant gowns, refined midi dresses, or dressy chic separates in soft neutrals, jewel tones, or classic evening shades.
+              </p>
+            </div>
+
+            <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
+              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
+                For Men
+              </p>
+              <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+                Suit and tie, or a smart long-sleeve dress shirt with dress pants for a polished formal look.
+              </p>
+            </div>
+
+            <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
+              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
+                Please Avoid
+              </p>
+              <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+                White, ivory, or anything overly casual. We’d love to see everyone dressed in a graceful, celebratory style.
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </section>
@@ -1121,6 +1186,7 @@ export default function App() {
           <Hero />
           <WeddingDetails />
           <OurStory />
+          <DressCode />
           <RSVP />
           <Footer />
         </>
