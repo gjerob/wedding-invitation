@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import { isSupabaseConfigured, supabase } from "./lib/supabase"
 
 type ToastState = {
@@ -70,6 +70,47 @@ function ToastHost({
           </div>
         </div>
       </div>
+    </div>
+  )
+}
+
+function Reveal({
+  children,
+  className = "",
+  delay = 0,
+}: {
+  children: React.ReactNode
+  className?: string
+  delay?: number
+}) {
+  const ref = useRef<HTMLDivElement | null>(null)
+  const [visible, setVisible] = useState(false)
+
+  useEffect(() => {
+    const node = ref.current
+    if (!node) return
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setVisible(true)
+          observer.disconnect()
+        }
+      },
+      { threshold: 0.15, rootMargin: "0px 0px -40px 0px" },
+    )
+
+    observer.observe(node)
+    return () => observer.disconnect()
+  }, [])
+
+  return (
+    <div
+      ref={ref}
+      className={`reveal ${visible ? "is-visible" : ""} ${className}`.trim()}
+      style={{ transitionDelay: `${delay}ms` }}
+    >
+      {children}
     </div>
   )
 }
@@ -280,22 +321,21 @@ function WeddingDetails() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {details.map((d) => (
-            <div
-              key={d.title}
-              className="bg-[#faf6f0] border border-[#e8dfd4] p-10 flex flex-col items-center text-center gap-4 hover:shadow-md hover:border-[#d4b896] transition-all duration-300"
-            >
-              <div className="text-[#b89a6a]">{d.icon}</div>
-              <h3 className="font-body tracking-[0.2em] text-xs uppercase text-[#7a5c48]">
-                {d.title}
-              </h3>
-              <div>
-                <p className="font-display text-[#4a3728] text-xl italic font-light">
-                  {d.line1}
-                </p>
-                <p className="font-body text-[#7a5c48] text-sm mt-1">{d.line2}</p>
+          {details.map((d, index) => (
+            <Reveal key={d.title} delay={index * 120} className="h-full">
+              <div className="bg-[#faf6f0] border border-[#e8dfd4] p-10 flex h-full flex-col items-center text-center gap-4 transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_34px_rgba(74,55,40,0.08)] hover:border-[#d4b896]">
+                <div className="text-[#b89a6a]">{d.icon}</div>
+                <h3 className="font-body tracking-[0.2em] text-xs uppercase text-[#7a5c48]">
+                  {d.title}
+                </h3>
+                <div>
+                  <p className="font-display text-[#4a3728] text-xl italic font-light">
+                    {d.line1}
+                  </p>
+                  <p className="font-body text-[#7a5c48] text-sm mt-1">{d.line2}</p>
+                </div>
               </div>
-            </div>
+            </Reveal>
           ))}
         </div>
       </div>
@@ -373,28 +413,29 @@ It was only after graduation that their friendship slowly blossomed into love. W
 
           <div className="space-y-16">
             {milestones.map((m, i) => (
-              <div
-                key={m.year}
-                className={`relative flex flex-col md:flex-row gap-8 md:gap-12 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                  }`}
-              >
-                <div className="absolute left-4 md:left-1/2 top-1 w-3 h-3 rounded-full bg-[#b89a6a] border-2 border-[#faf6f0] md:-translate-x-1/2 z-10" />
-
+              <Reveal key={m.year} delay={i * 120}>
                 <div
-                  className={`pl-12 md:pl-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"
+                  className={`relative flex flex-col md:flex-row gap-8 md:gap-12 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
                     }`}
                 >
-                  <span className="font-body text-[#b89a6a] tracking-[0.2em] text-xs uppercase">
-                    {m.year}
-                  </span>
-                  <h3 className="font-display text-[#4a3728] text-2xl italic font-light mt-1 mb-3">
-                    {m.title}
-                  </h3>
-                  <p className="font-body text-[#7a5c48] text-sm leading-relaxed">{m.body}</p>
-                </div>
+                  <div className="absolute left-4 md:left-1/2 top-1 w-3 h-3 rounded-full bg-[#b89a6a] border-2 border-[#faf6f0] md:-translate-x-1/2 z-10" />
 
-                <div className="hidden md:block md:w-1/2" />
-              </div>
+                  <div
+                    className={`pl-12 md:pl-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"
+                      }`}
+                  >
+                    <span className="font-body text-[#b89a6a] tracking-[0.2em] text-xs uppercase">
+                      {m.year}
+                    </span>
+                    <h3 className="font-display text-[#4a3728] text-2xl italic font-light mt-1 mb-3">
+                      {m.title}
+                    </h3>
+                    <p className="font-body text-[#7a5c48] text-sm leading-relaxed">{m.body}</p>
+                  </div>
+
+                  <div className="hidden md:block md:w-1/2" />
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -568,28 +609,30 @@ function RSVP() {
             Please let us know by <strong className="font-medium text-[#4a3728]">December 20, 2026</strong> whether you'll be joining us for our special day.
           </p>
 
-          <div className="mt-8 border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)]">
-            <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
-              <span className="text-lg">❧</span>
-              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
-                Note
-              </p>
+          <Reveal delay={120}>
+            <div className="mt-8 border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)] transition-transform duration-300 hover:-translate-y-0.5">
+              <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
+                <span className="text-lg">❧</span>
+                <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
+                  Note
+                </p>
+              </div>
+
+              <div className="space-y-4 text-left italic text-[#5d4134]">
+                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                  “If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!”
+                </blockquote>
+
+                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                  “While we absolutely adore your little ones, we’ve chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you’ll understand and take this as an opportunity to enjoy a well-deserved night out with us!”
+                </blockquote>
+
+                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                  “Due to our venue’s capacity, we’re only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you’ll understand our need to keep our celebration intimate and meaningful.”
+                </blockquote>
+              </div>
             </div>
-
-            <div className="space-y-4 text-left italic text-[#5d4134]">
-              <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                “If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!”
-              </blockquote>
-
-              <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                “While we absolutely adore your little ones, we’ve chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you’ll understand and take this as an opportunity to enjoy a well-deserved night out with us!”
-              </blockquote>
-
-              <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                “Due to our venue’s capacity, we’re only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you’ll understand our need to keep our celebration intimate and meaningful.”
-              </blockquote>
-            </div>
-          </div>
+          </Reveal>
         </div>
 
         {submitted ? (
