@@ -306,25 +306,30 @@ function WeddingDetails() {
 function OurStory() {
   const milestones = [
     {
-      year: "2019",
+      year: "2007",
       title: "First Meeting",
-      body: "It began with a chance encounter at a mutual friend's birthday gathering in Cebu City. Christian Jade noticed Aileen across the room — her laughter, her warmth — and found a reason to say hello. By the end of the night, neither wanted to leave.",
+      body: "Their story began in 2007, when Aileen and Christian Jade first became classmates in the second grade. At that young age, Aileen already had her first little “puppy crush” on Jade, thanks in part to a dear friend who was also their classmate. What she didn’t know then was that the boy who became her childhood crush would one day become the love of her life.",
     },
     {
-      year: "2021",
+      year: "2015 - 2019",
+      title: "Four Years of Friendship",
+      body: "Years later, fate brought them together again as college classmates. For four years, they shared the same classroom, creating memories and growing alongside each other. Their relationship remained purely casual and friendly throughout college, never imagining that something more was waiting just around the corner.",
+    },
+    {
+      year: "2019",
       title: "Making It Official",
-      body: "Two years of late-night conversations, long drives along the Cebu coastline, and Sunday mornings at the market later, Christian Jade asked Aileen to be his. She said yes before he could even finish the question.",
-    },
-    {
-      year: "2024",
-      title: "The Proposal",
-      body: "On a quiet evening at Tops Lookout with the lights of Cebu spread below them, Christian Jade got down on one knee. With trembling hands and a full heart, he asked Aileen to spend forever with him. She cried. He cried. The city glittered.",
+      body: "Just days after graduation, everything changed. In a romantic setup filled with candlelight and rose petals at the top of Bahia Mountain in Dewey Island, Negros, Christian Jade finally asked Aileen to be his girlfriend. After years of knowing each other—from childhood classmates to college friends—the timing finally felt right. And just like that, their love story truly began.",
     },
     {
       year: "2026",
-      title: "Forever Begins",
-      body: "Now they invite their family and friends to witness the start of their greatest adventure — two souls, one life, rooted in the island they love.",
+      title: "The Proposal",
+      body: "The day after they returned home from their Moalboal trip, an ordinary day at Aileen’s quiet home became one they would remember forever. With their beloved cat, Chaneyong, in his arms, Christian Jade got down on one knee and asked Aileen for her hand in marriage. In the comfort of their own home, surrounded by the simple familiarity of the life they had built together, he asked her to spend forever with him. And without hesitation, Aileen said yes.",
     },
+    {
+      year: "2027",
+      title: "Forever Begins",
+      body: "From childhood classmates in 2007, to college classmates and friends, and eventually to partners in life, their story has always found its way back to each other. Now, they look forward to the next chapter — a lifetime of choosing each other, growing together, and building a home filled with love, laughter, and the little moments that make life beautiful.",
+    }
   ]
 
   return (
@@ -356,7 +361,9 @@ function OurStory() {
               "Love is not just looking at each other, it's looking in the same direction."
             </p>
             <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
-              Aileen and Christian Jade found each other in the heart of Cebu — a city of festivals, faith, and the sea. Theirs is a story of friendship that grew roots, of trust that deepened with every passing season.
+              Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade, crossing paths again years later as college classmates. For four years, they shared the same classroom, the same seasons of growing up, and countless ordinary moments—never knowing that one day, those familiar moments would become the beginning of something much more beautiful.
+
+It was only after graduation that their friendship slowly blossomed into love. What began as years of knowing each other became a journey of choosing each other, growing together, and building a life side by side.
             </p>
           </div>
         </div>
@@ -461,7 +468,7 @@ function RSVP() {
             <span className="text-[#b89a6a] text-lg">✦</span>
           </div>
           <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
-            Please let us know by <strong className="font-medium text-[#4a3728]">January 15, 2026</strong> whether you'll be joining us for our special day.
+            Please let us know by <strong className="font-medium text-[#4a3728]">December 20, 2026</strong> whether you'll be joining us for our special day.
           </p>
         </div>
 
