@@ -568,7 +568,7 @@ function RSVP() {
             Please let us know by <strong className="font-medium text-[#4a3728]">December 20, 2026</strong> whether you'll be joining us for our special day.
           </p>
 
-          <div className="mt-8 rounded-[1.5rem] border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)]">
+          <div className="mt-8 border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)]">
             <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
               <span className="text-lg">❧</span>
               <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
