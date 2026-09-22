@@ -156,6 +156,20 @@ input, select, textarea {
   animation: spin 0.8s linear infinite;
 }
 
+.hero-card {
+  padding: 1.25rem 1.5rem;
+  border: 1px solid rgba(241, 216, 168, 0.4);
+  background: rgba(74, 55, 40, 0.16);
+  backdrop-filter: blur(2px);
+  box-shadow: 0 20px 45px rgba(18, 12, 8, 0.18);
+}
+
+.story-quote {
+  position: relative;
+  padding-left: 1.25rem;
+  border-left: 1px solid rgba(184, 154, 106, 0.7);
+}
+
 .hero-fade {
   animation: fade-up 1.2s ease-in-out both;
 }

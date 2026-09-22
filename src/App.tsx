@@ -219,14 +219,14 @@ function Hero() {
           Together Forever
         </p>
 
-        <h1 className="mb-4 font-display font-light leading-none text-white">
-          <span className="block text-6xl italic md:text-8xl lg:text-9xl">
+        <h1 className="mb-4 font-display font-light leading-[0.9] text-white">
+          <span className="block text-6xl italic md:text-8xl lg:text-[9rem]">
             Aileen
           </span>
           <span className="my-3 block text-sm font-body font-light uppercase tracking-[0.4em] text-[#f1d8a8] md:text-base">
             &amp;
           </span>
-          <span className="block text-6xl italic md:text-8xl lg:text-9xl">
+          <span className="block text-6xl italic md:text-8xl lg:text-[9rem]">
             Christian Jade
           </span>
         </h1>
@@ -250,12 +250,20 @@ function Hero() {
           </p>
         </div>
 
-        <a
-          href="#rsvp"
-          className="mt-10 inline-block border border-[#f1d8a8]/80 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#f1d8a8] transition-all duration-300 hover:bg-[#f1d8a8] hover:text-[#2a1a0e]"
-        >
-          RSVP
-        </a>
+        <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
+          <a
+            href="#rsvp"
+            className="inline-block border border-[#f1d8a8]/80 bg-[#f1d8a8]/10 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#f1d8a8] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f1d8a8] hover:text-[#2a1a0e]"
+          >
+            RSVP
+          </a>
+          <a
+            href="#story"
+            className="font-body text-[10px] uppercase tracking-[0.25em] text-white/75 transition-colors duration-300 hover:text-[#f1d8a8]"
+          >
+            Our Story
+          </a>
+        </div>
       </div>
 
       <div className="hero-float absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
@@ -397,13 +405,13 @@ function OurStory() {
             />
           </div>
           <div>
-            <p className="font-display italic text-[#4a3728] text-2xl md:text-3xl font-light leading-relaxed mb-6">
-              "Love is not just looking at each other, it's looking in the same direction."
-            </p>
+            <div className="story-quote mb-6">
+              <p className="font-display italic text-[#4a3728] text-2xl md:text-3xl font-light leading-relaxed">
+                "Love is not just looking at each other, it's looking in the same direction."
+              </p>
+            </div>
             <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
-              Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade, crossing paths again years later as college classmates. For four years, they shared the same classroom, the same seasons of growing up, and countless ordinary moments—never knowing that one day, those familiar moments would become the beginning of something much more beautiful.
-
-It was only after graduation that their friendship slowly blossomed into love. What began as years of knowing each other became a journey of choosing each other, growing together, and building a life side by side.
+              Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade and crossed paths again years later as college classmates. What started as friendship and familiarity slowly grew into a love story rooted in trust, laughter, and the quiet comfort of choosing one another again and again.
             </p>
           </div>
         </div>
@@ -614,7 +622,7 @@ function RSVP() {
               <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
                 <span className="text-lg">❧</span>
                 <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
-                  Note
+                  Important Notes
                 </p>
               </div>
 
