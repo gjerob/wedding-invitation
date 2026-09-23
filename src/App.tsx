@@ -731,7 +731,7 @@ function RSVP() {
             </h3>
             <p className="font-body text-[#7a5c48] text-sm">
               {form.attendance === "attending"
-                ? "We can't wait to celebrate with you. See you on February 14!"
+                ? "We can't wait to celebrate with you. See you on March 06, 2027!"
                 : "We'll miss you, but we're grateful for your love and warm wishes."}
             </p>
           </div>
