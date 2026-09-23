@@ -665,6 +665,14 @@ function RSVP() {
   const labelClass =
     "block font-body tracking-[0.15em] text-[#7a5c48] text-xs uppercase mb-1"
 
+  const normalizedQuery = form.name.trim()
+  const filteredGuests = normalizedQuery
+    ? guestList.filter((g) => {
+        const parts = g.toLowerCase().split(/\s+/)
+        return parts.some((p) => p.startsWith(normalizedQuery.toLowerCase()))
+      })
+    : []
+
   return (
     <section id="rsvp" className="bg-[#f2ebe0] py-28 px-6">
       <div className="max-w-2xl mx-auto">
@@ -737,12 +745,16 @@ function RSVP() {
                 className={inputClass}
               />
               <datalist id="guest-name-options">
-                {guestList.map((guestName) => (
+                {filteredGuests.map((guestName) => (
                   <option key={guestName} value={guestName} />
                 ))}
               </datalist>
               <p className="mt-2 font-body text-[11px] uppercase tracking-[0.12em] text-[#7a5c48]">
-                Select your name from the guest list
+                {normalizedQuery.length === 0
+                  ? "Start typing to find your name"
+                  : filteredGuests.length > 0
+                  ? "Select your name from the guest list"
+                  : "No matches found"}
               </p>
             </div>
 
