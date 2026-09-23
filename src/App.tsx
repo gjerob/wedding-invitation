@@ -668,10 +668,17 @@ function RSVP() {
   const normalizedQuery = form.name.trim()
   const filteredGuests = normalizedQuery
     ? guestList.filter((g) => {
-        const parts = g.toLowerCase().split(/\s+/)
-        return parts.some((p) => p.startsWith(normalizedQuery.toLowerCase()))
+        const q = normalizedQuery.toLowerCase()
+        const gl = g.toLowerCase()
+        if (gl === q) return true
+        if (gl.startsWith(q)) return true
+        const parts = gl.split(/\s+/)
+        return parts.some((p) => p.startsWith(q))
       })
     : []
+  const exactMatch = normalizedQuery
+    ? guestList.find((g) => g.toLowerCase() === normalizedQuery.toLowerCase())
+    : undefined
 
   return (
     <section id="rsvp" className="bg-[#f2ebe0] py-28 px-6">
@@ -750,7 +757,9 @@ function RSVP() {
                 ))}
               </datalist>
               <p className="mt-2 font-body text-[11px] uppercase tracking-[0.12em] text-[#7a5c48]">
-                {normalizedQuery.length === 0
+                {exactMatch
+                  ? `Welcome, ${exactMatch}! You're invited.`
+                  : normalizedQuery.length === 0
                   ? "Start typing to find your name"
                   : filteredGuests.length > 0
                   ? "Select your name from the guest list"
