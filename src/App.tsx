@@ -874,7 +874,7 @@ function Footer() {
         </svg>
         <div className="flex-1 max-w-20 h-px bg-[#d4b896]/30" />
       </div>
-      <p className="font-body text-xs text-[#d4b896]/40 tracking-widest">#AileenAndCJ2027</p>
+      <p className="font-body text-xs text-[#d4b896]/40 tracking-widest">#AiLifetimew/Chris</p>
     </footer>
   )
 }
