@@ -696,7 +696,7 @@ function RSVP() {
             <span className="text-[#b89a6a] text-lg">✦</span>
           </div>
           <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
-            Please let us know by <strong className="font-medium text-[#4a3728]">December 20, 2026</strong> whether you'll be joining us for our special day.
+            Please let us know by <strong className="font-medium text-[#4a3728]">November 14, 2026</strong> whether you'll be joining us for our special day.
           </p>
 
           <Reveal delay={120}>
@@ -723,6 +723,29 @@ function RSVP() {
               </div>
             </div>
           </Reveal>
+
+           <Reveal delay={120}>
+            <div className="mt-8 border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)] transition-transform duration-300 hover:-translate-y-0.5">
+              <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
+                <span className="text-lg">❧</span>
+                <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
+                  Gift Note
+                </p>
+              </div>
+
+              <div className="space-y-4 text-left italic text-[#5d4134]">
+                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                  “Having you with us on our special day is already a blessing we truly cherish. If you wish to give us a gift, we would be grateful for anything you choose to give.”
+                </blockquote>
+
+                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
+                  “If you prefer to give a monetary gift, it would be especially meaningful as we begin this new chapter and build our life together. Your love and generosity will be treasured as part of our journey as a married couple.”
+                </blockquote>
+                
+              </div>
+            </div>
+          </Reveal>
+
         </div>
 
         {submitted ? (
