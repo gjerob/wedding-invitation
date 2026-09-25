@@ -456,6 +456,14 @@ function DressCode() {
             <div className="h-16 flex-1 rounded-full bg-[#bbaccb]" />
           </div>
 
+          <div className="mb-8 overflow-hidden rounded-[1.25rem] border border-[#d4b896]/80 bg-[#f8f3ed] shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
+            <img
+              src="/img/dresscode.jpg"
+              alt="Dress code placeholder"
+              className="h-56 w-full object-cover bg-[linear-gradient(135deg,#f2ebe0,#ece0d1)] md:h-72"
+            />
+          </div>
+
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
             <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
               <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
@@ -512,17 +520,21 @@ function OurStory() {
       title: "The Proposal",
       body: "The day after they returned home from their Moalboal trip, an ordinary day at Aileen’s quiet home became one they would remember forever. With their beloved cat, Chaneyong, in his arms, Christian Jade got down on one knee and asked Aileen for her hand in marriage. In the comfort of their own home, surrounded by the simple familiarity of the life they had built together, he asked her to spend forever with him. And without hesitation, Aileen said yes.",
     },
-    {
-      year: "2027",
-      title: "Forever Begins",
-      body: "From childhood classmates in 2007, to college classmates and friends, and eventually to partners in life, their story has always found its way back to each other. Now, they look forward to the next chapter — a lifetime of choosing each other, growing together, and building a home filled with love, laughter, and the little moments that make life beautiful.",
-    }
   ]
+
+  const [activeIndex, setActiveIndex] = useState(0)
+  const carouselRef = useRef<HTMLDivElement | null>(null)
+
+  const scrollToSlide = (index: number) => {
+    const card = carouselRef.current?.children[index] as HTMLElement | undefined
+    card?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" })
+    setActiveIndex(index)
+  }
 
   return (
     <section id="story" className="bg-[#faf6f0] py-28 px-6">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-20">
+      <div className="max-w-5xl mx-auto">
+        <div className="text-center mb-16">
           <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
             How It All Began
           </p>
@@ -534,7 +546,7 @@ function OurStory() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-24">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-10">
           <div className="relative">
             <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
             <img
@@ -555,35 +567,63 @@ function OurStory() {
           </div>
         </div>
 
-        <div className="relative">
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-px bg-[#e8dfd4] md:-translate-x-px" />
-
-          <div className="space-y-16">
-            {milestones.map((m, i) => (
-              <Reveal key={m.year} delay={i * 120}>
-                <div
-                  className={`relative flex flex-col md:flex-row gap-8 md:gap-12 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
-                    }`}
+        <div className="story-carousel-wrap">
+          <div className="story-carousel-frame">
+            <div className="story-carousel" ref={carouselRef}>
+              {milestones.map((m, index) => (
+                <article
+                  key={m.year}
+                  className={`story-slide ${index === activeIndex ? "is-active" : ""}`}
+                  onClick={() => scrollToSlide(index)}
                 >
-                  <div className="absolute left-4 md:left-1/2 top-1 w-3 h-3 rounded-full bg-[#b89a6a] border-2 border-[#faf6f0] md:-translate-x-1/2 z-10" />
-
-                  <div
-                    className={`pl-12 md:pl-0 md:w-1/2 ${i % 2 === 0 ? "md:pr-16 md:text-right" : "md:pl-16"
-                      }`}
-                  >
-                    <span className="font-body text-[#b89a6a] tracking-[0.2em] text-xs uppercase">
-                      {m.year}
-                    </span>
-                    <h3 className="font-display text-[#4a3728] text-2xl italic font-light mt-1 mb-3">
-                      {m.title}
-                    </h3>
-                    <p className="font-body text-[#7a5c48] text-sm leading-relaxed">{m.body}</p>
+                  <div className="story-slide-inner">
+                    <span className="story-year">{m.year}</span>
+                    <h3 className="story-title">{m.title}</h3>
+                    <p className="story-body">{m.body}</p>
                   </div>
+                </article>
+              ))}
+            </div>
+          </div>
 
-                  <div className="hidden md:block md:w-1/2" />
-                </div>
-              </Reveal>
-            ))}
+          <div className="story-nav">
+            <button
+              type="button"
+              className="story-nav-button"
+              onClick={() => setActiveIndex((prev) => {
+                const next = prev === 0 ? milestones.length - 1 : prev - 1
+                scrollToSlide(next)
+                return next
+              })}
+              aria-label="Previous story"
+            >
+              ←
+            </button>
+
+            <div className="story-dots" aria-label="Story progress">
+              {milestones.map((item, index) => (
+                <button
+                  key={`${item.title}-dot`}
+                  type="button"
+                  aria-label={`Go to ${item.title}`}
+                  className={`story-dot ${index === activeIndex ? "is-active" : ""}`}
+                  onClick={() => scrollToSlide(index)}
+                />
+              ))}
+            </div>
+
+            <button
+              type="button"
+              className="story-nav-button"
+              onClick={() => setActiveIndex((prev) => {
+                const next = prev === milestones.length - 1 ? 0 : prev + 1
+                scrollToSlide(next)
+                return next
+              })}
+              aria-label="Next story"
+            >
+              →
+            </button>
           </div>
         </div>
       </div>
@@ -784,15 +824,15 @@ function RSVP() {
 
               <div className="space-y-4 text-left italic text-[#5d4134]">
                 <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  “If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!”
+                  If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!
                 </blockquote>
 
                 <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  “While we absolutely adore your little ones, we’ve chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you’ll understand and take this as an opportunity to enjoy a well-deserved night out with us!”
+                  While we absolutely adore your little ones, we’ve chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you’ll understand and take this as an opportunity to enjoy a well-deserved night out with us!
                 </blockquote>
 
                 <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  “Due to our venue’s capacity, we’re only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you’ll understand our need to keep our celebration intimate and meaningful.”
+                  Due to our venue’s capacity, we’re only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you’ll understand our need to keep our celebration intimate and meaningful.
                 </blockquote>
               </div>
             </div>
@@ -809,11 +849,11 @@ function RSVP() {
 
               <div className="space-y-4 text-left italic text-[#5d4134]">
                 <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  “Having you with us on our special day is already a blessing we truly cherish. If you wish to give us a gift, we would be grateful for anything you choose to give.”
+                  Having you with us on our special day is already a blessing we truly cherish. If you wish to give us a gift, we would be grateful for anything you choose to give.
                 </blockquote>
 
                 <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  “If you prefer to give a monetary gift, it would be especially meaningful as we begin this new chapter and build our life together. Your love and generosity will be treasured as part of our journey as a married couple.”
+                  If you prefer to give a monetary gift, it would be especially meaningful as we begin this new chapter and build our life together. Your love and generosity will be treasured as part of our journey as a married couple.
                 </blockquote>
 
               </div>
