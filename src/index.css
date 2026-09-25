@@ -281,6 +281,21 @@ input, select, textarea {
   color: #4a3728;
 }
 
+.story-media {
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+.story-media-image {
+  display: block;
+  width: 100%;
+  height: clamp(220px, 32vw, 300px);
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(0.9) contrast(1.02);
+}
+
 .story-body {
   margin: 0;
   color: #7a5c48;

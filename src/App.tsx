@@ -43,7 +43,7 @@ function ToastHost({
                     toast.onConfirm?.()
                     onClose()
                   }}
-                  className="flex-1 bg-[#4a3728] px-3 py-2 font-body text-[10px] uppercase tracking-[0.2em] text-[#faf6f0] transition-colors hover:bg-[#b89a6a]"
+                  className="flex-1 bg-[#8e9e86] px-3 py-2 font-body text-[10px] uppercase tracking-[0.2em] text-[#faf6f0] transition-colors hover:bg-[#f4e6b6] hover:text-[#3d453b]"
                 >
                   {toast.confirmLabel ?? "Confirm"}
                 </button>
@@ -504,16 +504,19 @@ function OurStory() {
       year: "2007",
       title: "First Meeting",
       body: "Their story began in 2007, when Aileen and Christian Jade first became classmates in the second grade. At that young age, Aileen already had her first little “puppy crush” on Jade, thanks in part to a dear friend who was also their classmate. What she didn’t know then was that the boy who became her childhood crush would one day become the love of her life.",
+      // image: "/img/4years.JPG",
     },
     {
       year: "2015 - 2019",
       title: "Four Years of Friendship",
       body: "Years later, fate brought them together again as college classmates. For four years, they shared the same classroom, creating memories and growing alongside each other. Their relationship remained purely casual and friendly throughout college, never imagining that something more was waiting just around the corner.",
+      // image: "/img/4years.JPG",
     },
     {
       year: "2019",
       title: "Making It Official",
       body: "Just days after graduation, everything changed. In a romantic setup filled with candlelight and rose petals at the top of Bahia Mountain in Dewey Island, Negros, Christian Jade finally asked Aileen to be his girlfriend. After years of knowing each other—from childhood classmates to college friends—the timing finally felt right. And just like that, their love story truly began.",
+      // image: "/img/makingofficial.jpg",
     },
     {
       year: "2026",
@@ -578,6 +581,13 @@ function OurStory() {
                 >
                   <div className="story-slide-inner">
                     <span className="story-year">{m.year}</span>
+
+                    {m.image ? (
+                      <div className="story-media">
+                        <img src={m.image} alt={m.title} className="story-media-image" />
+                      </div>
+                    ) : null}
+
                     <h3 className="story-title">{m.title}</h3>
                     <p className="story-body">{m.body}</p>
                   </div>
@@ -623,6 +633,146 @@ function OurStory() {
               aria-label="Next story"
             >
               →
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function GuestPhotoUpload() {
+  const [name, setName] = useState("")
+  const [file, setFile] = useState<File | null>(null)
+  const [uploading, setUploading] = useState(false)
+  const [error, setError] = useState("")
+  const [success, setSuccess] = useState("")
+  const [qrUrl, setQrUrl] = useState("")
+
+  useEffect(() => {
+    if (typeof window === "undefined") return
+    setQrUrl(`${window.location.origin}${window.location.pathname}#guest-photo-upload`)
+  }, [])
+
+  const handleUpload = async () => {
+    if (!name.trim()) {
+      setError("Please enter your name.")
+      return
+    }
+
+    if (!file) {
+      setError("Please choose a photo to upload.")
+      return
+    }
+
+    if (!supabase) {
+      setError("Photo upload is not enabled yet. Add your Supabase URL and anon key.")
+      return
+    }
+
+    setUploading(true)
+    setError("")
+    setSuccess("")
+
+    try {
+      const fileName = `${Date.now()}-${file.name.replace(/\s+/g, "-")}`
+      const { error: uploadError } = await supabase.storage
+        .from("guest-photos")
+        .upload(fileName, file, { cacheControl: "3600", upsert: false })
+
+      if (uploadError) {
+        if (String(uploadError.message).toLowerCase().includes("row-level security")) {
+          throw new Error(
+            "Guest photo upload is blocked by Supabase RLS. Run the storage policies in supabase/schema.sql or create the 'guest-photos' bucket first.",
+          )
+        }
+
+        throw uploadError
+      }
+
+      setSuccess("Thank you! Your photo has been uploaded for the couple to enjoy.")
+      setName("")
+      setFile(null)
+    } catch (uploadError) {
+      console.error("Guest photo upload error:", uploadError)
+      setError(
+        uploadError instanceof Error && uploadError.message
+          ? uploadError.message
+          : "We could not upload your photo right now. Please try again in a moment.",
+      )
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  return (
+    <section id="guest-photo-upload" className="bg-[#faf6f0] px-6 py-24">
+      <div className="mx-auto max-w-5xl">
+        <div className="mb-14 text-center">
+          <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
+            Shared Memories
+          </p>
+          <h2 className="mb-6 font-display text-5xl font-light italic text-[#4a3728] md:text-6xl">
+            Wedding Day Photo Wall
+          </h2>
+          <div className="divider-floral mx-auto w-48 justify-center">
+            <span className="text-lg text-[#b89a6a]">✦</span>
+          </div>
+        </div>
+
+        <div className="grid gap-8 rounded-[2rem] border border-[#e8dfd4] bg-[#f2ebe0] p-6 md:grid-cols-[220px_1fr] md:p-10">
+          <div className="flex flex-col items-center justify-center gap-4 rounded-[1.25rem] bg-[#faf6f0] p-6 text-center shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
+            <p className="font-body text-[10px] uppercase tracking-[0.22em] text-[#7a5c48]">
+              Scan to upload
+            </p>
+            {qrUrl ? (
+              <img
+                src={`https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(qrUrl)}`}
+                alt="QR code to upload wedding photos"
+                className="h-36 w-36 rounded-xl border border-[#d4b896] bg-white p-2"
+              />
+            ) : null}
+            <p className="font-body text-xs leading-relaxed text-[#7a5c48]">
+              Scan this code to access the guest photo upload instantly.
+            </p>
+          </div>
+
+          <div className="space-y-5">
+            <div>
+              <label className="mb-2 block font-body text-[10px] uppercase tracking-[0.15em] text-[#7a5c48]">
+                Your name
+              </label>
+              <input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Enter your name"
+                className="w-full border-b border-[#d4b896] bg-transparent py-3 font-body text-sm text-[#4a3728] placeholder-[#b89a6a]/60 focus:border-[#8c6e3f] focus:outline-none"
+              />
+            </div>
+
+            <div>
+              <label className="mb-2 block font-body text-[10px] uppercase tracking-[0.15em] text-[#7a5c48]">
+                Upload your photo
+              </label>
+              <input
+                type="file"
+                accept="image/*"
+                onChange={(e) => setFile(e.target.files?.[0] ?? null)}
+                className="block w-full text-sm text-[#7a5c48] file:mr-4 file:rounded-none file:border file:border-[#d4b896] file:bg-[#faf6f0] file:px-4 file:py-2 file:font-body file:text-[10px] file:uppercase file:tracking-[0.2em] file:text-[#4a3728] file:transition-colors hover:file:bg-[#f2ebe0]"
+              />
+            </div>
+
+            {error ? <p className="font-body text-sm text-red-600">{error}</p> : null}
+            {success ? <p className="font-body text-sm text-[#4a3728]">{success}</p> : null}
+
+            <button
+              type="button"
+              disabled={uploading}
+              onClick={handleUpload}
+              className="inline-flex items-center justify-center border border-[#8e9e86] bg-[#8e9e86] px-6 py-3 font-body text-[10px] uppercase tracking-[0.25em] text-[#faf6f0] transition-colors duration-300 hover:bg-[#f4e6b6] hover:text-[#3d453b] disabled:cursor-not-allowed disabled:opacity-70"
+            >
+              {uploading ? "Uploading..." : "Share my photo"}
             </button>
           </div>
         </div>
@@ -980,7 +1130,7 @@ function RSVP() {
                 type="submit"
                 disabled={saving}
                 aria-busy={saving}
-                className="bg-[#4a3728] text-[#faf6f0] font-body tracking-[0.25em] text-xs uppercase px-12 py-4 hover:bg-[#b89a6a] transition-colors duration-300 w-full md:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
+                className="bg-[#8e9e86] text-[#faf6f0] font-body tracking-[0.25em] text-xs uppercase px-12 py-4 hover:bg-[#f4e6b6] hover:text-[#3d453b] transition-colors duration-300 w-full md:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
               >
                 {saving ? (
                   <span className="inline-flex items-center justify-center gap-3">
@@ -1001,19 +1151,19 @@ function RSVP() {
 
 function Footer() {
   return (
-    <footer className="bg-[#4a3728] text-[#d4b896] py-14 px-6 text-center">
+    <footer className="bg-[#] text-[#4a3728] py-14 px-6 text-center">
       <p className="font-display italic text-3xl mb-2">Aileen &amp; Christian Jade</p>
-      <p className="font-body text-xs tracking-[0.25em] uppercase text-[#d4b896]/60 mb-6">
+      <p className="font-body text-xs tracking-[0.25em] uppercase text-[#4a3728]/60 mb-6">
         March 06, 2027 · Bais City
       </p>
       <div className="flex items-center justify-center gap-4 mb-8">
-        <div className="flex-1 max-w-20 h-px bg-[#d4b896]/30" />
-        <svg width="14" height="14" viewBox="0 0 24 24" fill="#d4b896" opacity="0.5">
+        <div className="flex-1 max-w-20 h-px bg-[#4a3728]/30" />
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="#4a3728" opacity="0.5">
           <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
         </svg>
-        <div className="flex-1 max-w-20 h-px bg-[#d4b896]/30" />
+        <div className="flex-1 max-w-20 h-px bg-[#4a3728]/30" />
       </div>
-      <p className="font-body text-xs text-[#d4b896]/40 tracking-widest">#AiLifetimew/Chris</p>
+      <p className="font-body text-xs text-[#4a3728]/40 tracking-widest">#AiLifetimew/Chris</p>
     </footer>
   )
 }
@@ -1191,7 +1341,7 @@ function AdminPanel() {
               type="submit"
               disabled={loading}
               aria-busy={loading}
-              className="w-full bg-[#4a3728] text-[#faf6f0] font-body tracking-[0.2em] text-xs uppercase px-6 py-4 hover:bg-[#b89a6a] transition-colors duration-300 disabled:opacity-60"
+              className="w-full bg-[#8e9e86] text-[#faf6f0] font-body tracking-[0.2em] text-xs uppercase px-6 py-4 hover:bg-[#f4e6b6] hover:text-[#3d453b] transition-colors duration-300 disabled:opacity-60"
             >
               {loading ? (
                 <span className="inline-flex items-center justify-center gap-3">
@@ -1347,6 +1497,7 @@ export default function App() {
           <WeddingDetails />
           <OurStory />
           <DressCode />
+          <GuestPhotoUpload />
           <RSVP />
           <Footer />
         </>

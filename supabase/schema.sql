@@ -31,4 +31,23 @@ on public.rsvps
 for delete
 using (auth.role() = 'authenticated');
 
+insert into storage.buckets (id, name, public)
+values ('guest-photos', 'guest-photos', true)
+on conflict (id) do nothing;
+
+create policy "Anyone can upload guest photos"
+on storage.objects
+for insert
+with check (bucket_id = 'guest-photos');
+
+create policy "Anyone can view guest photos"
+on storage.objects
+for select
+using (bucket_id = 'guest-photos');
+
+create policy "Anyone can update guest photos"
+on storage.objects
+for update
+using (bucket_id = 'guest-photos');
+
 create index if not exists rsvps_created_at_idx on public.rsvps (created_at desc);
