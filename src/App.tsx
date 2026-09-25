@@ -199,6 +199,62 @@ function Nav() {
   )
 }
 
+function CountdownToForever() {
+  const weddingDate = new Date("2027-03-06T16:00:00")
+
+  const getTimeLeft = (targetDate: Date) => {
+    const difference = Math.max(targetDate.getTime() - Date.now(), 0)
+
+    return {
+      days: Math.floor(difference / (1000 * 60 * 60 * 24)),
+      hours: Math.floor((difference / (1000 * 60 * 60)) % 24),
+      minutes: Math.floor((difference / (1000 * 60)) % 60),
+      seconds: Math.floor((difference / 1000) % 60),
+    }
+  }
+
+  const [timeLeft, setTimeLeft] = useState(() => getTimeLeft(weddingDate))
+
+  useEffect(() => {
+    const timer = window.setInterval(() => {
+      setTimeLeft(getTimeLeft(weddingDate))
+    }, 1000)
+
+    return () => window.clearInterval(timer)
+  }, [])
+
+  const countdownItems = [
+    { label: "Days", value: timeLeft.days },
+    { label: "Hours", value: timeLeft.hours },
+    { label: "Minutes", value: timeLeft.minutes },
+    { label: "Seconds", value: timeLeft.seconds },
+  ]
+
+  return (
+    <div className="mt-10 w-full max-w-xl">
+      <p className="mb-4 font-body text-[10px] uppercase tracking-[0.35em] text-[#f1d8a8]">
+        Counting down to forever
+      </p>
+
+      <div className="grid grid-cols-4 gap-3 sm:gap-4">
+        {countdownItems.map((item) => (
+          <div
+            key={item.label}
+            className="rounded-2xl border border-[#f1d8a8]/40 bg-[#1d120d]/35 px-2 py-4 backdrop-blur-[2px] shadow-[0_12px_30px_rgba(13,8,5,0.16)]"
+          >
+            <p className="font-display text-3xl font-light italic text-white md:text-4xl">
+              {String(item.value).padStart(2, "0")}
+            </p>
+            <p className="mt-2 font-body text-[9px] uppercase tracking-[0.28em] text-[#f7e7cb]">
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  )
+}
+
 function Hero() {
   return (
     <section
@@ -221,13 +277,13 @@ function Hero() {
         </p>
 
         <h1 className="mb-4 font-display font-light leading-[0.9] text-white">
-          <span className="block text-6xl italic md:text-8xl lg:text-[9rem]">
+          <span className="block text-5xl italic md:text-7xl lg:text-[7.5rem]">
             Aileen
           </span>
-          <span className="my-3 block text-sm font-body font-light uppercase tracking-[0.4em] text-[#f1d8a8] md:text-base">
+          <span className="my-3 block font-display text-4xl italic leading-none tracking-[0.08em] text-[#f3d9ae] md:text-5xl">
             &amp;
           </span>
-          <span className="block text-6xl italic md:text-8xl lg:text-[9rem]">
+          <span className="block text-5xl italic md:text-7xl lg:text-[7.5rem]">
             Christian Jade
           </span>
         </h1>
@@ -250,6 +306,8 @@ function Hero() {
             Barangay Talungon, Bais City
           </p>
         </div>
+
+        <CountdownToForever />
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
           <a
@@ -288,6 +346,9 @@ function WeddingDetails() {
       title: "The Date",
       line1: "March 06, 2027",
       line2: "Saturday · 4:00 PM",
+      buttonLabel: "Add to Google Calendar",
+      href:
+        "https://calendar.google.com/calendar/render?action=TEMPLATE&text=Aileen%20%26%20Christian%20Jade%20Wedding&details=Wedding%20celebration%20for%20Aileen%20and%20Christian%20Jade.&location=Feliz%20Hotel%20%26%20Events%2C%20Bais%20City%2C%20Philippines&dates=20270306T080000Z/20270306T120000Z",
     },
     {
       icon: (
@@ -299,6 +360,8 @@ function WeddingDetails() {
       title: "The Venue",
       line1: "Feliz Hotel & Events",
       line2: "Bais City, Philippines",
+      buttonLabel: "Open Map",
+      href: "https://www.google.com/maps/search/?api=1&query=Feliz+Hotel+%26+Events+Bais+City+Philippines",
     },
     {
       icon: (
@@ -311,6 +374,8 @@ function WeddingDetails() {
       title: "Reception",
       line1: "Feliz Hotel & Events",
       line2: "Bais City, Philippines",
+      buttonLabel: "Open Map",
+      href: "https://www.google.com/maps/search/?api=1&query=Feliz+Hotel+%26+Events+Bais+City+Philippines",
     },
   ]
 
@@ -343,6 +408,15 @@ function WeddingDetails() {
                   </p>
                   <p className="font-body text-[#7a5c48] text-sm mt-1">{d.line2}</p>
                 </div>
+
+                <a
+                  href={d.href}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-auto inline-flex items-center justify-center border border-[#b89a6a] bg-[#f2ebe0] px-4 py-2.5 font-body text-[10px] uppercase tracking-[0.22em] text-[#4a3728] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#b89a6a] hover:text-[#faf6f0]"
+                >
+                  {d.buttonLabel}
+                </a>
               </div>
             </Reveal>
           ))}
@@ -729,7 +803,7 @@ function RSVP() {
               <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
                 <span className="text-lg">❧</span>
                 <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
-                  Gift Note
+                  A Note on Gifts
                 </p>
               </div>
 
@@ -741,7 +815,7 @@ function RSVP() {
                 <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
                   “If you prefer to give a monetary gift, it would be especially meaningful as we begin this new chapter and build our life together. Your love and generosity will be treasured as part of our journey as a married couple.”
                 </blockquote>
-                
+
               </div>
             </div>
           </Reveal>
