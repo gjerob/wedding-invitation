@@ -255,6 +255,68 @@ function CountdownToForever() {
   )
 }
 
+function MusicPlayer() {
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+  const [isPlaying, setIsPlaying] = useState(false)
+
+  useEffect(() => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    const handlePlay = () => setIsPlaying(true)
+    const handlePause = () => setIsPlaying(false)
+
+    audio.volume = 0.25
+    audio.loop = true
+    audio.addEventListener("play", handlePlay)
+    audio.addEventListener("pause", handlePause)
+
+    return () => {
+      audio.removeEventListener("play", handlePlay)
+      audio.removeEventListener("pause", handlePause)
+    }
+  }, [])
+
+  const toggleMusic = async () => {
+    const audio = audioRef.current
+    if (!audio) return
+
+    if (audio.paused) {
+      try {
+        await audio.play()
+      } catch {
+        setIsPlaying(false)
+      }
+    } else {
+      audio.pause()
+    }
+  }
+
+  return (
+    <div className="fixed bottom-5 right-5 z-50">
+      <audio
+        ref={audioRef}
+        preload="auto"
+        loop
+        src="/0926.MP3"
+      />
+
+      <button
+        type="button"
+        aria-label={isPlaying ? "Pause music" : "Play music"}
+        onClick={toggleMusic}
+        className={`music-toggle ${isPlaying ? "is-playing" : ""}`.trim()}
+      >
+        <span className="music-toggle-icon" aria-hidden="true">
+          <span className={`music-note ${isPlaying ? "is-playing" : "is-paused"}`}>
+            {isPlaying ? "♪" : "❚❚"}
+          </span>
+        </span>
+      </button>
+    </div>
+  )
+}
+
 function Hero() {
   return (
     <section
@@ -641,7 +703,11 @@ function OurStory() {
   )
 }
 
-function GuestPhotoUpload() {
+function GuestPhotoUpload({
+  onUploadSuccess,
+}: {
+  onUploadSuccess?: () => void
+}) {
   const [name, setName] = useState("")
   const [file, setFile] = useState<File | null>(null)
   const [uploading, setUploading] = useState(false)
@@ -691,6 +757,7 @@ function GuestPhotoUpload() {
       }
 
       setSuccess("Thank you! Your photo has been uploaded for the couple to enjoy.")
+      onUploadSuccess?.()
       setName("")
       setFile(null)
     } catch (uploadError) {
@@ -776,6 +843,94 @@ function GuestPhotoUpload() {
             </button>
           </div>
         </div>
+      </div>
+    </section>
+  )
+}
+
+function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
+  const [photos, setPhotos] = useState<Array<{ name: string; url: string }>>([])
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState("")
+
+  useEffect(() => {
+    const fetchPhotos = async () => {
+      if (!supabase) {
+        setPhotos([])
+        return
+      }
+
+      try {
+        setLoading(true)
+        setError("")
+
+        const { data, error: listError } = await supabase.storage.from("guest-photos").list("", {
+          limit: 100,
+          offset: 0,
+          sortBy: { column: "created_at", order: "desc" },
+        })
+
+        if (listError) throw listError
+
+        const gallery = (data ?? [])
+          .filter((item) => item.name && !item.name.startsWith("."))
+          .map((item) => ({
+            name: item.name,
+            url: supabase.storage.from("guest-photos").getPublicUrl(item.name).data.publicUrl,
+          }))
+
+        setPhotos(gallery)
+      } catch (fetchError) {
+        console.error("Guest gallery fetch error:", fetchError)
+        setError("We couldn't load the guest photo gallery yet. Please check back soon.")
+      } finally {
+        setLoading(false)
+      }
+    }
+
+    fetchPhotos()
+  }, [refreshKey])
+
+  return (
+    <section className="bg-[#faf6f0] px-6 py-24">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-14 text-center">
+          <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
+            Shared Memories
+          </p>
+          <h2 className="mb-6 font-display text-5xl font-light italic text-[#4a3728] md:text-6xl">
+            Guest Photo Gallery
+          </h2>
+          <div className="divider-floral mx-auto w-48 justify-center">
+            <span className="text-lg text-[#b89a6a]">✦</span>
+          </div>
+        </div>
+
+        {!supabase ? (
+          <div className="rounded-[1.5rem] border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+            Connect Supabase to enable the guest photo gallery.
+          </div>
+        ) : loading ? (
+          <div className="rounded-[1.5rem] border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+            Loading photos...
+          </div>
+        ) : error ? (
+          <div className="rounded-[1.5rem] border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-red-600">
+            {error}
+          </div>
+        ) : photos.length === 0 ? (
+          <div className="rounded-[1.5rem] border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+            No guest photos yet. Be the first to share a memory from our celebration.
+          </div>
+        ) : (
+          <div className="photo-gallery">
+            {photos.map((photo) => (
+              <figure key={photo.name} className="photo-tile">
+                <img src={photo.url} alt="Guest wedding memory" loading="lazy" />
+              </figure>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   )
@@ -1469,6 +1624,7 @@ export default function App() {
   const [isAdminRoute, setIsAdminRoute] = useState(() =>
     typeof window !== "undefined" && window.location.pathname.startsWith("/admin")
   )
+  const [galleryRefreshKey, setGalleryRefreshKey] = useState(0)
 
   useEffect(() => {
     const syncRoute = () => {
@@ -1493,11 +1649,13 @@ export default function App() {
       ) : (
         <>
           <Nav />
+          <MusicPlayer />
           <Hero />
           <WeddingDetails />
           <OurStory />
           <DressCode />
-          <GuestPhotoUpload />
+          <GuestPhotoUpload onUploadSuccess={() => setGalleryRefreshKey((value) => value + 1)} />
+          <GuestGallery refreshKey={galleryRefreshKey} />
           <RSVP />
           <Footer />
         </>
