@@ -258,8 +258,6 @@ function CountdownToForever() {
 function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [audioSrc, setAudioSrc] = useState("/0926.mp3")
-  const [hasRetriedFallback, setHasRetriedFallback] = useState(false)
 
   useEffect(() => {
     const audio = audioRef.current
@@ -295,17 +293,6 @@ function MusicPlayer() {
   }
 
   const handleAudioError = () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    if (!hasRetriedFallback && audioSrc === "/0926.mp3") {
-      setHasRetriedFallback(true)
-      setAudioSrc("/0926.wav")
-      audio.load()
-      return
-    }
-
-    audio.pause()
     setIsPlaying(false)
   }
 
@@ -315,7 +302,7 @@ function MusicPlayer() {
         ref={audioRef}
         preload="auto"
         loop
-        src={audioSrc}
+        src="/0926.wav"
         onError={handleAudioError}
       />
 
