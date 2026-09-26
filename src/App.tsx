@@ -258,7 +258,7 @@ function CountdownToForever() {
 function MusicPlayer() {
   const audioRef = useRef<HTMLAudioElement | null>(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [audioSrc, setAudioSrc] = useState("/0926.mp3")
+  const [audioSrc, setAudioSrc] = useState("/0926.wav")
 
   useEffect(() => {
     const audio = audioRef.current
@@ -294,8 +294,8 @@ function MusicPlayer() {
   }
 
   const handleAudioError = () => {
-    if (audioSrc !== "/0926.MP3") {
-      setAudioSrc("/0926.MP3")
+    if (audioSrc !== "/0926.wav") {
+      setAudioSrc("/0926.wav")
       return
     }
 
