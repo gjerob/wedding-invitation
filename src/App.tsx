@@ -783,7 +783,7 @@ function GuestPhotoUpload({
           </div>
         </div>
 
-        <div className="grid gap-8 rounded-[2rem] border border-[#e8dfd4] bg-[#f2ebe0] p-6 md:grid-cols-[220px_1fr] md:p-10">
+        <div className="grid gap-8 border border-[#e8dfd4] bg-[#f2ebe0] p-6 md:grid-cols-[220px_1fr] md:p-10">
           <div className="flex flex-col items-center justify-center gap-4 rounded-[1.25rem] bg-[#faf6f0] p-6 text-center shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
             <p className="font-body text-[10px] uppercase tracking-[0.22em] text-[#7a5c48]">
               Scan to upload
