@@ -448,7 +448,7 @@ function WeddingDetails() {
 
   return (
     <section id="wedding" className="bg-[#f2ebe0] py-24 px-6">
-      <div className="max-w-5xl mx-auto">
+      <div className="mx-auto max-w-[1200px]">
         <div className="text-center mb-16">
           <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
             Save the Date
@@ -496,7 +496,7 @@ function WeddingDetails() {
 function DressCode() {
   return (
     <section id="dress-code" className="bg-[#faf6f0] py-24 px-6">
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-[1200px]">
         <div className="text-center mb-14">
           <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
             Dress Code
@@ -770,7 +770,7 @@ function GuestPhotoUpload({
 
   return (
     <section id="guest-photo-upload" className="bg-[#faf6f0] px-6 py-24">
-      <div className="mx-auto max-w-5xl">
+      <div className="mx-auto max-w-[1200px]">
         <div className="mb-14 text-center">
           <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
             Shared Memories
@@ -889,7 +889,7 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
 
   return (
     <section className="bg-[#faf6f0] px-6 py-24">
-      <div className="mx-auto max-w-6xl">
+      <div className="mx-auto max-w-[1200px]">
         <div className="mb-14 text-center">
           <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
             Shared Memories
@@ -903,19 +903,19 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
         </div>
 
         {!supabase ? (
-          <div className="rounded-[1.5rem] border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+          <div className="border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
             Connect Supabase to enable the guest photo gallery.
           </div>
         ) : loading ? (
-          <div className="rounded-[1.5rem] border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+          <div className="border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
             Loading photos...
           </div>
         ) : error ? (
-          <div className="rounded-[1.5rem] border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-red-600">
+          <div className="border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-red-600">
             {error}
           </div>
         ) : photos.length === 0 ? (
-          <div className="rounded-[1.5rem] border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+          <div className="border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
             No guest photos yet. Be the first to share a memory from our celebration.
           </div>
         ) : (
