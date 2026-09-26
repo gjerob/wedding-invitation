@@ -514,15 +514,6 @@ function DressCode() {
             Garden Formal / Evening Chic
           </p>
 
-          <div className="mb-8 flex w-full overflow-hidden rounded-full border border-[#d4b896]/80 bg-[#faf6f0] p-2 shadow-[0_10px_25px_rgba(74,55,40,0.03)]">
-            <div className="h-16 flex-1 rounded-full bg-[#b3bae6]" />
-            <div className="h-16 flex-1 rounded-full bg-[#feebc0]" />
-            <div className="h-16 flex-1 rounded-full bg-[#feaaaa]" />
-            <div className="h-16 flex-1 rounded-full bg-[#ffaf74]" />
-            <div className="h-16 flex-1 rounded-full bg-[#b1ae81]" />
-            <div className="h-16 flex-1 rounded-full bg-[#bbaccb]" />
-          </div>
-
           <div className="mb-8 overflow-hidden rounded-[1.25rem] border border-[#d4b896]/80 bg-[#f8f3ed] shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
             <img
               src="/img/dresscode.jpg"
