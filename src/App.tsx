@@ -622,6 +622,16 @@ function OurStory() {
                 "Love is not just looking at each other, it's looking in the same direction."
               </p>
             </div>
+
+            <div className="mb-6 border-l-2 border-[#d4b896] pl-4">
+              <p className="font-body text-[10px] uppercase tracking-[0.28em] text-[#b89a6a] mb-2">
+                Ecclesiastes 4:12
+              </p>
+              <p className="font-display italic text-[#5d473a] text-xl md:text-2xl font-light leading-relaxed">
+                "A cord of three strands is not quickly broken."
+              </p>
+            </div>
+
             <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
               Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade and crossed paths again years later as college classmates. What started as friendship and familiarity slowly grew into a love story rooted in trust, laughter, and the quiet comfort of choosing one another again and again.
             </p>
