@@ -129,6 +129,7 @@ function Nav() {
   const links = [
     { label: "Our Story", href: "#story" },
     { label: "Wedding", href: "#wedding" },
+    { label: "Order of Events", href: "#order-of-events" },
     { label: "Dress Code", href: "#dress-code" },
     { label: "RSVP", href: "#rsvp" },
   ]
@@ -493,6 +494,58 @@ function WeddingDetails() {
   )
 }
 
+function OrderOfEvents() {
+  const events = [
+    { time: "3:00PM", title: "Guest Arrivals" },
+    { time: "4:00PM", title: "Ceremony Starts" },
+    { time: "6:00PM", title: "Cocktails & Snacks" },
+    { time: "6:50PM", title: "First Dance" },
+    { time: "6:55PM", title: "Cake Cutting" },
+    { time: "7:15PM", title: "Dinner & Toasts" },
+    { time: "8:45PM", title: "Dancing & Celebrations" },
+    { time: "10:00PM", title: "Couple Send Off" },
+  ]
+
+  return (
+    <section id="order-of-events" className="bg-[#faf6f0] py-24 px-6">
+      <div className="mx-auto max-w-[1000px]">
+        <div className="text-center mb-14">
+          <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
+            Wedding Timeline
+          </p>
+          <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
+            Order of Events
+          </h2>
+          <div className="divider-floral justify-center w-48 mx-auto">
+            <span className="text-[#b89a6a] text-lg">✦</span>
+          </div>
+        </div>
+
+        <div className="bg-[#f2ebe0]/60 p-5 md:p-8">
+          <div className="space-y-2">
+            {events.map((event, index) => (
+              <Reveal key={event.time} delay={index * 80}>
+                <div className="grid items-center gap-4 border-b border-[#d9cab4] py-3 last:border-b-0 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-6">
+                  <p className="font-body text-[11px] uppercase tracking-[0.22em] text-[#4a3728] md:text-xs">
+                    {event.time}
+                  </p>
+
+                  <div className="flex items-center gap-4">
+                    <span className="hidden h-px flex-1 bg-[#d9cab4] sm:block" />
+                    <p className="font-body text-[11px] uppercase tracking-[0.22em] text-[#7a5c48] md:text-xs">
+                      {event.title}
+                    </p>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function DressCode() {
   return (
     <section id="dress-code" className="bg-[#faf6f0] py-24 px-6">
@@ -622,16 +675,14 @@ function OurStory() {
                 "Love is not just looking at each other, it's looking in the same direction."
               </p>
             </div>
-
-            <div className="mb-6 border-l-2 border-[#d4b896] pl-4">
-              <p className="font-body text-[10px] uppercase tracking-[0.28em] text-[#b89a6a] mb-2">
+            <div className="mb-6 border-l border-[#d4b896] pl-4 text-left">
+              <p className="font-display italic text-[#4a3728] text-xl md:text-2xl font-light leading-relaxed">
+                “A cord of three strands is not quickly broken.”
+              </p>
+              <p className="mt-2 font-body text-[10px] uppercase tracking-[0.25em] text-[#b89a6a]">
                 Ecclesiastes 4:12
               </p>
-              <p className="font-display italic text-[#5d473a] text-xl md:text-2xl font-light leading-relaxed">
-                "A cord of three strands is not quickly broken."
-              </p>
             </div>
-
             <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
               Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade and crossed paths again years later as college classmates. What started as friendship and familiarity slowly grew into a love story rooted in trust, laughter, and the quiet comfort of choosing one another again and again.
             </p>
@@ -780,7 +831,7 @@ function GuestPhotoUpload({
 
   return (
     <section id="guest-photo-upload" className="bg-[#faf6f0] px-6 py-24">
-      <div className="mx-auto max-w-[1200px]">
+      <div className="mx-auto max-w-5xl">
         <div className="mb-14 text-center">
           <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
             Shared Memories
@@ -1658,6 +1709,7 @@ export default function App() {
           <MusicPlayer />
           <Hero />
           <WeddingDetails />
+          <OrderOfEvents />
           <OurStory />
           <DressCode />
           <GuestPhotoUpload onUploadSuccess={() => setGalleryRefreshKey((value) => value + 1)} />
