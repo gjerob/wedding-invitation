@@ -654,7 +654,7 @@ function DressCode() {
 function OurStory() {
   const milestones = [
     {
-      year: "2007",
+      year: "2005",
       title: "First Meeting",
       body: "Their story began in 2007, when Aileen and Christian Jade first became classmates in the second grade. At that young age, Aileen already had her first little “puppy crush” on Jade, thanks in part to a dear friend who was also their classmate. What she didn’t know then was that the boy who became her childhood crush would one day become the love of her life.",
       image: "/img/our-story.jpg",
