@@ -200,7 +200,7 @@ function Nav() {
   )
 }
 
-function CountdownToForever() {
+function CountdownToForever({ light = false }: { light?: boolean }) {
   const weddingDate = new Date("2027-03-06T16:00:00")
 
   const getTimeLeft = (targetDate: Date) => {
@@ -231,22 +231,27 @@ function CountdownToForever() {
     { label: "Seconds", value: timeLeft.seconds },
   ]
 
+  const panelClass = light
+    ? "flex flex-col items-center justify-center rounded-2xl border border-[#d4b896]/80 bg-[#f8f3ed] px-2 py-4 shadow-[0_12px_24px_rgba(74,55,40,0.03)]"
+    : "flex flex-col items-center justify-center rounded-2xl border border-[#f1d8a8]/40 bg-[#1d120d]/35 px-2 py-4 backdrop-blur-[2px] shadow-[0_12px_30px_rgba(13,8,5,0.16)]"
+
+  const valueClass = light ? "text-[#4a3728]" : "text-white"
+  const labelClass = light ? "text-[#7a5c48]" : "text-[#f7e7cb]"
+  const headingClass = light ? "text-[#b89a6a]" : "text-[#f1d8a8]"
+
   return (
     <div className="mt-10 w-full max-w-xl">
-      <p className="mb-4 font-body text-[10px] uppercase tracking-[0.35em] text-[#f1d8a8]">
+      <p className={`mb-4 text-center font-body text-[10px] uppercase tracking-[0.35em] ${headingClass}`}>
         Counting down to forever
       </p>
 
       <div className="grid grid-cols-4 gap-3 sm:gap-4">
         {countdownItems.map((item) => (
-          <div
-            key={item.label}
-            className="rounded-2xl border border-[#f1d8a8]/40 bg-[#1d120d]/35 px-2 py-4 backdrop-blur-[2px] shadow-[0_12px_30px_rgba(13,8,5,0.16)]"
-          >
-            <p className="font-display text-3xl font-light italic text-white md:text-4xl">
+          <div key={item.label} className={panelClass}>
+            <p className={`font-display text-3xl font-light italic md:text-4xl ${valueClass}`}>
               {String(item.value).padStart(2, "0")}
             </p>
-            <p className="mt-2 font-body text-[9px] uppercase tracking-[0.28em] text-[#f7e7cb]">
+            <p className={`mt-2 font-body text-[9px] uppercase tracking-[0.28em] ${labelClass}`}>
               {item.label}
             </p>
           </div>
@@ -341,21 +346,17 @@ function Hero() {
 
       <div className="hero-fade relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
         <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f1d8a8]">
-          Together Forever
+          Together with our families
         </p>
 
-        <h1 className="mb-4 font-display font-light leading-[0.9] text-white">
-          <span className="block text-5xl italic md:text-7xl lg:text-[7.5rem]">
-            Aileen
-          </span>
-          <span className="my-3 block font-display text-4xl italic leading-none tracking-[0.08em] text-[#f3d9ae] md:text-5xl">
-            &amp;
-          </span>
-          <span className="block text-5xl italic md:text-7xl lg:text-[7.5rem]">
-            Christian Jade
+        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-white font-light leading-[0.9] md:gap-x-3">
+          <span className="text-[2.8rem] italic sm:text-[3.6rem] md:text-[5.2rem] lg:text-[6.4rem]">
+            Aileen &amp; Christian Jade
           </span>
         </h1>
-
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f1d8a8]">
+          We invite you to celebrate
+        </p>
         <div className="my-8 flex w-56 items-center gap-4">
           <div className="h-px flex-1 bg-[#f1d8a8]/70" />
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#f1d8a8" opacity="0.9">
@@ -366,7 +367,7 @@ function Hero() {
 
         <div className="text-center">
           <p className="mb-1 font-display text-2xl font-light italic text-[#f7e7cb] md:text-3xl">
-            March 06, 2027
+            March <span className="mx-1">•</span> 06 <span className="mx-1">•</span> 2027
           </p>
           <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80">
             Tambis Road, JMPV Glad Subdivision,
@@ -374,8 +375,6 @@ function Hero() {
             Barangay Talungon, Bais City
           </p>
         </div>
-
-        <CountdownToForever />
 
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
           <a
@@ -391,6 +390,10 @@ function Hero() {
             Our Story
           </a>
         </div>
+      </div>
+
+      <div className="hero-vertical-text" aria-label="A love story in bloom">
+        A love story in bloom
       </div>
 
       <div className="hero-float absolute bottom-8 left-1/2 z-10 -translate-x-1/2">
@@ -449,8 +452,9 @@ function WeddingDetails() {
 
   return (
     <section id="wedding" className="bg-[#f2ebe0] py-24 px-6">
-      <div className="mx-auto max-w-[1200px]">
-        <div className="text-center mb-16">
+      <Reveal delay={80} className="block">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="text-center mb-16">
           <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
             Save the Date
           </p>
@@ -460,6 +464,10 @@ function WeddingDetails() {
           <div className="divider-floral justify-center w-48 mx-auto">
             <span className="text-[#b89a6a] text-lg">✦</span>
           </div>
+        </div>
+
+        <div className="mb-10 flex justify-center">
+          <CountdownToForever light />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -488,8 +496,9 @@ function WeddingDetails() {
               </div>
             </Reveal>
           ))}
+          </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }
@@ -508,40 +517,60 @@ function OrderOfEvents() {
 
   return (
     <section id="order-of-events" className="bg-[#faf6f0] py-24 px-6">
-      <div className="mx-auto max-w-[1000px]">
-        <div className="text-center mb-14">
-          <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
-            Wedding Timeline
-          </p>
-          <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
-            Order of Events
-          </h2>
-          <div className="divider-floral justify-center w-48 mx-auto">
-            <span className="text-[#b89a6a] text-lg">✦</span>
+      <Reveal delay={80} className="block">
+        <div className="mx-auto max-w-[1000px]">
+          <div className="text-center mb-14">
+            <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
+              Wedding Timeline
+            </p>
+            <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
+              Order of Events
+            </h2>
+            <div className="divider-floral justify-center w-48 mx-auto">
+              <span className="text-[#b89a6a] text-lg">✦</span>
+            </div>
           </div>
-        </div>
 
-        <div className="bg-[#f2ebe0]/60 p-5 md:p-8">
-          <div className="space-y-2">
-            {events.map((event, index) => (
-              <Reveal key={event.time} delay={index * 80}>
-                <div className="grid items-center gap-4 border-b border-[#d9cab4] py-3 last:border-b-0 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-6">
-                  <p className="font-body text-[11px] uppercase tracking-[0.22em] text-[#4a3728] md:text-xs">
-                    {event.time}
-                  </p>
-
-                  <div className="flex items-center gap-4">
-                    <span className="hidden h-px flex-1 bg-[#d9cab4] sm:block" />
-                    <p className="font-body text-[11px] uppercase tracking-[0.22em] text-[#7a5c48] md:text-xs">
-                      {event.title}
+          <div className="bg-[#f2ebe0]/60 p-5 md:p-8">
+            <div className="space-y-2">
+              {events.map((event, index) => (
+                <Reveal key={event.time} delay={index * 80}>
+                  <div className="grid items-center gap-4 border-b border-[#d9cab4] py-3 last:border-b-0 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-6">
+                    <p className="font-body text-[11px] uppercase tracking-[0.22em] text-[#4a3728] md:text-xs">
+                      {event.time}
                     </p>
+
+                    <div className="flex items-center gap-4">
+                      <span className="hidden h-px flex-1 bg-[#d9cab4] sm:block" />
+                      <p className="font-body text-[11px] uppercase tracking-[0.22em] text-[#7a5c48] md:text-xs">
+                        {event.title}
+                      </p>
+                    </div>
                   </div>
-                </div>
-              </Reveal>
-            ))}
+                </Reveal>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Reveal>
+    </section>
+  )
+}
+
+function StoryTransition() {
+  return (
+    <section className="bg-[#faf6f0] px-6 py-16 md:py-20">
+      <Reveal delay={60} className="block">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="text-center">
+            <div className="mx-auto mb-5 h-px w-20 bg-[#d4b896]" />
+            <p className="font-display text-xl italic leading-relaxed text-[#4a3728] md:text-2xl">
+              And now, we're beginning our next chapter together.
+            </p>
+            <div className="mx-auto mt-5 h-px w-20 bg-[#d4b896]" />
+          </div>
+        </div>
+      </Reveal>
     </section>
   )
 }
@@ -549,62 +578,75 @@ function OrderOfEvents() {
 function DressCode() {
   return (
     <section id="dress-code" className="bg-[#faf6f0] py-24 px-6">
-      <div className="mx-auto max-w-[1200px]">
-        <div className="text-center mb-14">
-          <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
-            Dress Code
-          </p>
-          <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
-            Formal Elegance
-          </h2>
-          <div className="divider-floral justify-center w-48 mx-auto">
-            <span className="text-[#b89a6a] text-lg">✦</span>
+      <Reveal delay={80} className="block">
+        <div className="w-full max-w-none">
+          <div className="bg-[#f2ebe0] border-y border-[#e8dfd4] p-8 md:p-12 text-center">
+            <div className="mx-auto max-w-[1200px]">
+              <div className="text-center mb-10">
+                <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
+                  Dress Code
+                </p>
+                <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
+                  Formal Elegance
+                </h2>
+                <div className="divider-floral justify-center w-48 mx-auto">
+                  <span className="text-[#b89a6a] text-lg">✦</span>
+                </div>
+              </div>
+
+              <p className="font-display italic text-[#4a3728] text-3xl md:text-4xl mb-8">
+                Garden Formal / Evening Chic
+              </p>
+
+              <div className="mb-8 grid gap-4 md:grid-cols-2">
+                <div className="overflow-hidden rounded-[1.25rem] border border-[#d4b896]/80 bg-[#f8f3ed] shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
+                  <img
+                    src="/img/dress-code-boys.jpg"
+                    alt="Dress code for boys"
+                    className="h-[260px] w-full object-cover bg-[linear-gradient(135deg,#f2ebe0,#ece0d1)] sm:h-[320px] md:h-[420px]"
+                  />
+                </div>
+                <div className="overflow-hidden rounded-[1.25rem] border border-[#d4b896]/80 bg-[#f8f3ed] shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
+                  <img
+                    src="/img/dress-code-girls.jpg"
+                    alt="Dress code for girls"
+                    className="h-[260px] w-full object-cover bg-[linear-gradient(135deg,#f2ebe0,#ece0d1)] sm:h-[320px] md:h-[420px]"
+                  />
+                </div>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
+                <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
+                  <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
+                    For Women
+                  </p>
+                  <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+                    Elegant gowns, refined midi dresses, or dressy chic separates in soft neutrals, jewel tones, or classic evening shades.
+                  </p>
+                </div>
+
+                <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
+                  <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
+                    For Men
+                  </p>
+                  <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+                    Suit and tie, or a smart long-sleeve dress shirt with dress pants for a polished formal look.
+                  </p>
+                </div>
+
+                <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
+                  <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
+                    Please Avoid
+                  </p>
+                  <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+                    White, ivory, or anything overly casual. We’d love to see everyone dressed in a graceful, celebratory style.
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
-
-        <div className="bg-[#f2ebe0] border border-[#e8dfd4] p-8 md:p-12 text-center">
-          <p className="font-display italic text-[#4a3728] text-3xl md:text-4xl mb-8">
-            Garden Formal / Evening Chic
-          </p>
-
-          <div className="mb-8 overflow-hidden rounded-[1.25rem] border border-[#d4b896]/80 bg-[#f8f3ed] shadow-[0_12px_28px_rgba(74,55,40,0.04)]">
-            <img
-              src="/img/dresscode.jpg"
-              alt="Dress code placeholder"
-              className="h-56 w-full object-cover bg-[linear-gradient(135deg,#f2ebe0,#ece0d1)] md:h-72"
-            />
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-left">
-            <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
-              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
-                For Women
-              </p>
-              <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
-                Elegant gowns, refined midi dresses, or dressy chic separates in soft neutrals, jewel tones, or classic evening shades.
-              </p>
-            </div>
-
-            <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
-              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
-                For Men
-              </p>
-              <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
-                Suit and tie, or a smart long-sleeve dress shirt with dress pants for a polished formal look.
-              </p>
-            </div>
-
-            <div className="bg-[#faf6f0] border border-[#e8dfd4] p-6">
-              <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a] mb-3">
-                Please Avoid
-              </p>
-              <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
-                White, ivory, or anything overly casual. We’d love to see everyone dressed in a graceful, celebratory style.
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
+      </Reveal>
     </section>
   )
 }
@@ -615,147 +657,107 @@ function OurStory() {
       year: "2007",
       title: "First Meeting",
       body: "Their story began in 2007, when Aileen and Christian Jade first became classmates in the second grade. At that young age, Aileen already had her first little “puppy crush” on Jade, thanks in part to a dear friend who was also their classmate. What she didn’t know then was that the boy who became her childhood crush would one day become the love of her life.",
-      // image: "/img/4years.JPG",
+      image: "/img/our-story.jpg",
     },
     {
       year: "2015 - 2019",
       title: "Four Years of Friendship",
       body: "Years later, fate brought them together again as college classmates. For four years, they shared the same classroom, creating memories and growing alongside each other. Their relationship remained purely casual and friendly throughout college, never imagining that something more was waiting just around the corner.",
-      // image: "/img/4years.JPG",
+      image: "/img/4years.JPG",
     },
     {
       year: "2019",
       title: "Making It Official",
       body: "Just days after graduation, everything changed. In a romantic setup filled with candlelight and rose petals at the top of Bahia Mountain in Dewey Island, Negros, Christian Jade finally asked Aileen to be his girlfriend. After years of knowing each other—from childhood classmates to college friends—the timing finally felt right. And just like that, their love story truly began.",
-      // image: "/img/makingofficial.jpg",
+      image: "/img/makingofficial.jpg",
     },
     {
       year: "2026",
       title: "The Proposal",
       body: "The day after they returned home from their Moalboal trip, an ordinary day at Aileen’s quiet home became one they would remember forever. With their beloved cat, Chaneyong, in his arms, Christian Jade got down on one knee and asked Aileen for her hand in marriage. In the comfort of their own home, surrounded by the simple familiarity of the life they had built together, he asked her to spend forever with him. And without hesitation, Aileen said yes.",
+      image: "/img/4everbegins.jpg",
     },
   ]
 
-  const [activeIndex, setActiveIndex] = useState(0)
-  const carouselRef = useRef<HTMLDivElement | null>(null)
-
-  const scrollToSlide = (index: number) => {
-    const card = carouselRef.current?.children[index] as HTMLElement | undefined
-    card?.scrollIntoView({ behavior: "smooth", inline: "start", block: "nearest" })
-    setActiveIndex(index)
-  }
-
   return (
     <section id="story" className="bg-[#faf6f0] py-28 px-6">
-      <div className="max-w-5xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
-            How It All Began
-          </p>
-          <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
-            Our Story
-          </h2>
-          <div className="divider-floral justify-center w-48 mx-auto">
-            <span className="text-[#b89a6a] text-lg">✦</span>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-10">
-          <div className="relative">
-            <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
-            <img
-              src="/img/our-story.jpg"
-              alt="Couple walking through lush greenery"
-              className="w-full h-[480px] object-cover relative z-10"
-            />
-          </div>
-          <div>
-            <div className="story-quote mb-6">
-              <p className="font-display italic text-[#4a3728] text-2xl md:text-3xl font-light leading-relaxed">
-                "Love is not just looking at each other, it's looking in the same direction."
-              </p>
-            </div>
-            <div className="mb-6 border-l border-[#d4b896] pl-4 text-left">
-              <p className="font-display italic text-[#4a3728] text-xl md:text-2xl font-light leading-relaxed">
-                “A cord of three strands is not quickly broken.”
-              </p>
-              <p className="mt-2 font-body text-[10px] uppercase tracking-[0.25em] text-[#b89a6a]">
-                Ecclesiastes 4:12
-              </p>
-            </div>
-            <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
-              Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade and crossed paths again years later as college classmates. What started as friendship and familiarity slowly grew into a love story rooted in trust, laughter, and the quiet comfort of choosing one another again and again.
+      <Reveal delay={90} className="block">
+        <div className="max-w-5xl mx-auto">
+          <div className="text-center mb-16">
+            <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
+              How It All Began
             </p>
+            <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
+              Our Story
+            </h2>
+            <div className="divider-floral justify-center w-48 mx-auto">
+              <span className="text-[#b89a6a] text-lg">✦</span>
+            </div>
           </div>
-        </div>
 
-        <div className="story-carousel-wrap">
-          <div className="story-carousel-frame">
-            <div className="story-carousel" ref={carouselRef}>
-              {milestones.map((m, index) => (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center mb-10">
+            <div className="relative">
+              <div className="absolute -top-4 -left-4 w-full h-full border border-[#d4b896]/40" />
+              <img
+                src="/img/our-story.jpg"
+                alt="Couple walking through lush greenery"
+                className="w-full h-[480px] object-cover relative z-10"
+              />
+            </div>
+            <div>
+              <div className="story-quote mb-6">
+                <p className="font-display italic text-[#4a3728] text-2xl md:text-3xl font-light leading-relaxed">
+                  "Love is not just looking at each other, it's looking in the same direction."
+                </p>
+              </div>
+              <div className="mb-6 border-l border-[#d4b896] pl-4 text-left">
+                <p className="font-display italic text-[#4a3728] text-xl md:text-2xl font-light leading-relaxed">
+                  “A cord of three strands is not quickly broken.”
+                </p>
+                <p className="mt-2 font-body text-[10px] uppercase tracking-[0.25em] text-[#b89a6a]">
+                  Ecclesiastes 4:12
+                </p>
+              </div>
+              <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
+                Aileen and Christian Jade’s story began long before they became a couple. They first met as classmates in the second grade and crossed paths again years later as college classmates. What started as friendship and familiarity slowly grew into a love story rooted in trust, laughter, and the quiet comfort of choosing one another again and again.
+              </p>
+            </div>
+          </div>
+
+          <div className="story-timeline-wrap">
+            {milestones.map((m, index) => (
+              <Reveal key={m.year} delay={index * 120} className="block">
                 <article
-                  key={m.year}
-                  className={`story-slide ${index === activeIndex ? "is-active" : ""}`}
-                  onClick={() => scrollToSlide(index)}
+                  className={`story-timeline-item ${index % 2 !== 0 ? "is-reversed" : ""}`}
                 >
-                  <div className="story-slide-inner">
-                    <span className="story-year">{m.year}</span>
+                  <div className="story-timeline-date">
+                    <span className="story-timeline-year">{m.year}</span>
+                    <span className="story-timeline-decor" aria-hidden="true">✦</span>
+                  </div>
 
+                  <div className="story-timeline-center" aria-hidden="true">
+                    <span className="story-timeline-line" />
+                    <span className="story-timeline-dot" />
+                  </div>
+
+                  <div className="story-timeline-card">
                     {m.image ? (
-                      <div className="story-media">
-                        <img src={m.image} alt={m.title} className="story-media-image" />
+                      <div className="story-timeline-media">
+                        <img src={m.image} alt={m.title} className="story-timeline-image" />
                       </div>
                     ) : null}
 
-                    <h3 className="story-title">{m.title}</h3>
-                    <p className="story-body">{m.body}</p>
+                    <div className="story-timeline-copy">
+                      <h3 className="story-timeline-title">{m.title}</h3>
+                      <p className="story-timeline-body">{m.body}</p>
+                    </div>
                   </div>
                 </article>
-              ))}
-            </div>
-          </div>
-
-          <div className="story-nav">
-            <button
-              type="button"
-              className="story-nav-button"
-              onClick={() => setActiveIndex((prev) => {
-                const next = prev === 0 ? milestones.length - 1 : prev - 1
-                scrollToSlide(next)
-                return next
-              })}
-              aria-label="Previous story"
-            >
-              ←
-            </button>
-
-            <div className="story-dots" aria-label="Story progress">
-              {milestones.map((item, index) => (
-                <button
-                  key={`${item.title}-dot`}
-                  type="button"
-                  aria-label={`Go to ${item.title}`}
-                  className={`story-dot ${index === activeIndex ? "is-active" : ""}`}
-                  onClick={() => scrollToSlide(index)}
-                />
-              ))}
-            </div>
-
-            <button
-              type="button"
-              className="story-nav-button"
-              onClick={() => setActiveIndex((prev) => {
-                const next = prev === milestones.length - 1 ? 0 : prev + 1
-                scrollToSlide(next)
-                return next
-              })}
-              aria-label="Next story"
-            >
-              →
-            </button>
+              </Reveal>
+            ))}
           </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }
@@ -831,8 +833,9 @@ function GuestPhotoUpload({
 
   return (
     <section id="guest-photo-upload" className="bg-[#faf6f0] px-6 py-24">
-      <div className="mx-auto max-w-5xl">
-        <div className="mb-14 text-center">
+      <Reveal delay={90} className="block">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-14 text-center">
           <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
             Shared Memories
           </p>
@@ -899,8 +902,9 @@ function GuestPhotoUpload({
               {uploading ? "Uploading..." : "Share my photo"}
             </button>
           </div>
+          </div>
         </div>
-      </div>
+      </Reveal>
     </section>
   )
 }
@@ -950,8 +954,9 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
 
   return (
     <section className="bg-[#faf6f0] px-6 py-24">
-      <div className="mx-auto max-w-[1200px]">
-        <div className="mb-14 text-center">
+      <Reveal delay={90} className="block">
+        <div className="mx-auto max-w-[1200px]">
+          <div className="mb-14 text-center">
           <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
             Shared Memories
           </p>
@@ -976,9 +981,7 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
             {error}
           </div>
         ) : photos.length === 0 ? (
-          <div className="border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
-            No guest photos yet. Be the first to share a memory from our celebration.
-          </div>
+          <div className="min-h-[120px]" aria-live="polite" />
         ) : (
           <div className="photo-gallery">
             {photos.map((photo) => (
@@ -988,7 +991,8 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
             ))}
           </div>
         )}
-      </div>
+          </div>
+        </Reveal>
     </section>
   )
 }
@@ -1158,204 +1162,232 @@ function RSVP() {
     ? guestList.find((g) => g.toLowerCase() === normalizedQuery.toLowerCase())
     : undefined
 
+  const [openFaq, setOpenFaq] = useState<number | null>(0)
+
+  const faqs = [
+    {
+      question: "When should we RSVP by?",
+      answer: [
+        "If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!",
+      ],
+    },
+    {
+      question: "Are children welcome?",
+      answer: [
+        "While we absolutely adore your little ones, we've chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you'll understand and take this as an opportunity to enjoy a well-deserved night out with us!",
+      ],
+    },
+    {
+      question: "Is there a guest limit?",
+      answer: [
+        "Due to our venue's capacity, we're only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you'll understand our need to keep our celebration intimate and meaningful.",
+      ],
+    },
+    {
+      question: "What about gifts?",
+      answer: [
+        "Having you with us on our special day is already a blessing we truly cherish. If you wish to give us a gift, we would be grateful for anything you choose to give.",
+        "If you prefer to give a monetary gift, it would be especially meaningful as we begin this new chapter and build our life together. Your love and generosity will be treasured as part of our journey as a married couple.",
+      ],
+    },
+  ]
+
   return (
     <section id="rsvp" className="bg-[#f2ebe0] py-28 px-6">
-      <div className="max-w-2xl mx-auto">
-        <div className="text-center mb-16">
-          <p className="font-body text-[#b89a6a] tracking-[0.3em] text-xs uppercase mb-3">
+      <div className="mx-auto max-w-6xl">
+        <div className="mb-16 text-center">
+          <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
             Join Us
           </p>
-          <h2 className="font-display font-light text-[#4a3728] text-5xl md:text-6xl italic mb-6">
+          <h2 className="mb-6 font-display text-5xl font-light italic text-[#4a3728] md:text-6xl">
             RSVP
           </h2>
-          <div className="divider-floral justify-center w-48 mx-auto mb-6">
-            <span className="text-[#b89a6a] text-lg">✦</span>
+          <div className="divider-floral mx-auto mb-6 w-48 justify-center">
+            <span className="text-lg text-[#b89a6a]">✦</span>
           </div>
-          <p className="font-body text-[#7a5c48] text-sm leading-relaxed">
+          <p className="font-body text-sm leading-relaxed text-[#7a5c48]">
             Please let us know by <strong className="font-medium text-[#4a3728]">November 14, 2026</strong> whether you'll be joining us for our special day.
           </p>
-
-          <Reveal delay={120}>
-            <div className="mt-8 border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)] transition-transform duration-300 hover:-translate-y-0.5">
-              <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
-                <span className="text-lg">❧</span>
-                <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
-                  Important Notes
-                </p>
-              </div>
-
-              <div className="space-y-4 text-left italic text-[#5d4134]">
-                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!
-                </blockquote>
-
-                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  While we absolutely adore your little ones, we’ve chosen to make our wedding an adults-only celebration, with the exception of the children who are part of our entourage. We hope you’ll understand and take this as an opportunity to enjoy a well-deserved night out with us!
-                </blockquote>
-
-                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  Due to our venue’s capacity, we’re only able to accommodate the guests listed on the invitation. We truly appreciate your understanding and hope you’ll understand our need to keep our celebration intimate and meaningful.
-                </blockquote>
-              </div>
-            </div>
-          </Reveal>
-
-           <Reveal delay={120}>
-            <div className="mt-8 border border-[#e8d9c7] bg-[#fbf7f2] px-6 py-5 shadow-[0_10px_30px_rgba(74,55,40,0.04)] transition-transform duration-300 hover:-translate-y-0.5">
-              <div className="mb-3 flex items-center gap-3 text-[#b89a6a]">
-                <span className="text-lg">❧</span>
-                <p className="font-body tracking-[0.2em] text-[10px] uppercase text-[#b89a6a]">
-                  A Note on Gifts
-                </p>
-              </div>
-
-              <div className="space-y-4 text-left italic text-[#5d4134]">
-                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  Having you with us on our special day is already a blessing we truly cherish. If you wish to give us a gift, we would be grateful for anything you choose to give.
-                </blockquote>
-
-                <blockquote className="border-l border-[#d4b896] pl-4 text-sm leading-relaxed">
-                  If you prefer to give a monetary gift, it would be especially meaningful as we begin this new chapter and build our life together. Your love and generosity will be treasured as part of our journey as a married couple.
-                </blockquote>
-
-              </div>
-            </div>
-          </Reveal>
-
         </div>
 
-        {submitted ? (
-          <div className="text-center bg-[#faf6f0] border border-[#d4b896] py-16 px-8">
-            <div className="text-[#b89a6a] text-4xl mb-4">♡</div>
-            <h3 className="font-display italic text-[#4a3728] text-3xl font-light mb-3">
-              Thank you, {form.name}!
-            </h3>
-            <p className="font-body text-[#7a5c48] text-sm">
-              {form.attendance === "attending"
-                ? "We can't wait to celebrate with you. See you on March 06, 2027!"
-                : "We'll miss you, but we're grateful for your love and warm wishes."}
-            </p>
-          </div>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="bg-[#faf6f0] border border-[#e8dfd4] p-10 md:p-14 space-y-8"
-          >
-            <div>
-              <label className={labelClass}>Search Your Name</label>
-              <input
-                list="guest-name-options"
-                type="text"
-                required
-                placeholder="Start typing your name..."
-                value={form.name}
-                onChange={(e) => update("name", e.target.value)}
-                className={inputClass}
-              />
-              <datalist id="guest-name-options">
-                {filteredGuests.map((guestName) => (
-                  <option key={guestName} value={guestName} />
-                ))}
-              </datalist>
-              <p className="mt-2 font-body text-[11px] uppercase tracking-[0.12em] text-[#7a5c48]">
-                {exactMatch
-                  ? `Welcome, ${exactMatch}! You're invited.`
-                  : normalizedQuery.length === 0
-                  ? "Start typing to find your name"
-                  : filteredGuests.length > 0
-                  ? "Select your name from the guest list"
-                  : "No matches found"}
-              </p>
-            </div>
+        <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
+          <Reveal delay={120}>
+            <div className="faq-shell h-full">
+              <div className="faq-header">
+                <span className="faq-header-mark">❧</span>
+                <p className="faq-header-label">FAQ</p>
+              </div>
 
-            <div>
-              <label className={labelClass}>Email Address</label>
-              <input
-                type="email"
-                required
-                placeholder="your@email.com"
-                value={form.email}
-                onChange={(e) => update("email", e.target.value)}
-                className={inputClass}
-              />
-            </div>
+              <div className="faq-list">
+                {faqs.map((faq, index) => {
+                  const isOpen = openFaq === index
 
-            <div>
-              <label className={labelClass}>Attendance</label>
-              <div className="flex flex-col gap-2 mt-2">
-                {[
-                  { value: "attending", label: "Joyfully Attending" },
-                  { value: "not-attending", label: "Regretfully Decline" },
-                ].map((opt) => (
-                  <label key={opt.value} className="flex items-center gap-3 cursor-pointer group">
-                    <span
-                      className={`w-4 h-4 rounded-full border flex items-center justify-center flex-shrink-0 transition-colors ${form.attendance === opt.value
-                          ? "border-[#b89a6a] bg-[#b89a6a]"
-                          : "border-[#d4b896] group-hover:border-[#b89a6a]"
-                        }`}
-                    >
-                      {form.attendance === opt.value && (
-                        <span className="w-1.5 h-1.5 rounded-full bg-white" />
-                      )}
-                    </span>
-                    <span
-                      className="font-body text-xs text-[#7a5c48]"
-                      onClick={() => update("attendance", opt.value)}
-                    >
-                      {opt.label}
-                    </span>
-                  </label>
-                ))}
+                  return (
+                    <div key={faq.question} className={`faq-item ${isOpen ? "is-open" : ""}`}>
+                      <button
+                        type="button"
+                        className="faq-trigger"
+                        onClick={() => setOpenFaq(isOpen ? null : index)}
+                        aria-expanded={isOpen}
+                      >
+                        <span className="faq-question-wrap">
+                          <span className="faq-badge" aria-hidden="true">✦</span>
+                          <span className="faq-question">{faq.question}</span>
+                        </span>
+                        <span className={`faq-icon ${isOpen ? "is-open" : ""}`} aria-hidden="true">
+                          <span className="faq-chevron" />
+                        </span>
+                      </button>
+
+                      <div className={`faq-content ${isOpen ? "is-open" : ""}`}>
+                        <div className="faq-content-inner">
+                          {faq.answer.map((paragraph) => (
+                            <p key={paragraph} className="faq-answer">
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
+          </Reveal>
 
-            <div>
-              <label className={labelClass}>Meal Preference</label>
-              <select
-                value={form.meal}
-                onChange={(e) => update("meal", e.target.value)}
-                className={`${inputClass} cursor-pointer`}
-              >
-                <option value="no-preference">No Preference</option>
-                <option value="meat">Meat</option>
-                <option value="seafood">Seafood</option>
-                <option value="vegetarian">Vegetarian</option>
-                <option value="vegan">Vegan</option>
-              </select>
+          {submitted ? (
+            <div className="text-center bg-[#faf6f0] border border-[#d4b896] py-16 px-8">
+              <div className="mb-4 text-4xl text-[#b89a6a]">♡</div>
+              <h3 className="mb-3 font-display text-3xl font-light italic text-[#4a3728]">
+                Thank you, {form.name}!
+              </h3>
+              <p className="font-body text-sm text-[#7a5c48]">
+                {form.attendance === "attending"
+                  ? "We can't wait to celebrate with you. See you on March 06, 2027!"
+                  : "We'll miss you, but we're grateful for your love and warm wishes."}
+              </p>
             </div>
+          ) : (
+            <form
+              onSubmit={handleSubmit}
+              className="space-y-8 border border-[#e8dfd4] bg-[#faf6f0] p-8 md:p-10"
+            >
+              <div>
+                <label className={labelClass}>Search Your Name</label>
+                <input
+                  list="guest-name-options"
+                  type="text"
+                  required
+                  placeholder="Start typing your name..."
+                  value={form.name}
+                  onChange={(e) => update("name", e.target.value)}
+                  className={inputClass}
+                />
+                <datalist id="guest-name-options">
+                  {filteredGuests.map((guestName) => (
+                    <option key={guestName} value={guestName} />
+                  ))}
+                </datalist>
+                <p className="mt-2 font-body text-[11px] uppercase tracking-[0.12em] text-[#7a5c48]">
+                  {exactMatch
+                    ? `Welcome, ${exactMatch}! You're invited.`
+                    : normalizedQuery.length === 0
+                    ? "Start typing to find your name"
+                    : filteredGuests.length > 0
+                    ? "Select your name from the guest list"
+                    : "No matches found"}
+                </p>
+              </div>
 
-            <div>
-              <label className={labelClass}>Message to the Couple (Optional)</label>
-              <textarea
-                rows={3}
-                placeholder="Share your wishes..."
-                value={form.message}
-                onChange={(e) => update("message", e.target.value)}
-                className={`${inputClass} resize-none`}
-              />
-            </div>
+              <div>
+                <label className={labelClass}>Email Address</label>
+                <input
+                  type="email"
+                  required
+                  placeholder="your@email.com"
+                  value={form.email}
+                  onChange={(e) => update("email", e.target.value)}
+                  className={inputClass}
+                />
+              </div>
 
-            {error ? <p className="font-body text-sm text-red-600">{error}</p> : null}
+              <div>
+                <label className={labelClass}>Attendance</label>
+                <div className="mt-2 flex flex-col gap-2">
+                  {[
+                    { value: "attending", label: "Joyfully Attending" },
+                    { value: "not-attending", label: "Regretfully Decline" },
+                  ].map((opt) => (
+                    <label key={opt.value} className="group flex cursor-pointer items-center gap-3">
+                      <span
+                        className={`flex h-4 w-4 flex-shrink-0 items-center justify-center rounded-full border transition-colors ${form.attendance === opt.value
+                            ? "border-[#b89a6a] bg-[#b89a6a]"
+                            : "border-[#d4b896] group-hover:border-[#b89a6a]"
+                          }`}
+                      >
+                        {form.attendance === opt.value && (
+                          <span className="h-1.5 w-1.5 rounded-full bg-white" />
+                        )}
+                      </span>
+                      <span
+                        className="font-body text-xs text-[#7a5c48]"
+                        onClick={() => update("attendance", opt.value)}
+                      >
+                        {opt.label}
+                      </span>
+                    </label>
+                  ))}
+                </div>
+              </div>
 
-            <div className="pt-4 text-center">
-              <button
-                type="submit"
-                disabled={saving}
-                aria-busy={saving}
-                className="bg-[#8e9e86] text-[#faf6f0] font-body tracking-[0.25em] text-xs uppercase px-12 py-4 hover:bg-[#f4e6b6] hover:text-[#3d453b] transition-colors duration-300 w-full md:w-auto disabled:opacity-70 disabled:cursor-not-allowed"
-              >
-                {saving ? (
-                  <span className="inline-flex items-center justify-center gap-3">
-                    <span className="loading-spinner" />
-                    Sending...
-                  </span>
-                ) : (
-                  "Send RSVP"
-                )}
-              </button>
-            </div>
-          </form>
-        )}
+              <div>
+                <label className={labelClass}>Meal Preference</label>
+                <select
+                  value={form.meal}
+                  onChange={(e) => update("meal", e.target.value)}
+                  className={`${inputClass} cursor-pointer`}
+                >
+                  <option value="no-preference">No Preference</option>
+                  <option value="meat">Meat</option>
+                  <option value="seafood">Seafood</option>
+                  <option value="vegetarian">Vegetarian</option>
+                  <option value="vegan">Vegan</option>
+                </select>
+              </div>
+
+              <div>
+                <label className={labelClass}>Message to the Couple (Optional)</label>
+                <textarea
+                  rows={3}
+                  placeholder="Share your wishes..."
+                  value={form.message}
+                  onChange={(e) => update("message", e.target.value)}
+                  className={`${inputClass} resize-none`}
+                />
+              </div>
+
+              {error ? <p className="font-body text-sm text-red-600">{error}</p> : null}
+
+              <div className="pt-4 text-center">
+                <button
+                  type="submit"
+                  disabled={saving}
+                  aria-busy={saving}
+                  className="w-full bg-[#8e9e86] px-12 py-4 font-body text-xs uppercase tracking-[0.25em] text-[#faf6f0] transition-colors duration-300 hover:bg-[#f4e6b6] hover:text-[#3d453b] disabled:cursor-not-allowed disabled:opacity-70 md:w-auto"
+                >
+                  {saving ? (
+                    <span className="inline-flex items-center justify-center gap-3">
+                      <span className="loading-spinner" />
+                      Sending...
+                    </span>
+                  ) : (
+                    "Send RSVP"
+                  )}
+                </button>
+              </div>
+            </form>
+          )}
+        </div>
       </div>
     </section>
   )
@@ -1709,8 +1741,9 @@ export default function App() {
           <MusicPlayer />
           <Hero />
           <WeddingDetails />
-          <OrderOfEvents />
           <OurStory />
+          <StoryTransition />
+          <OrderOfEvents />
           <DressCode />
           <GuestPhotoUpload onUploadSuccess={() => setGalleryRefreshKey((value) => value + 1)} />
           <GuestGallery refreshKey={galleryRefreshKey} />
