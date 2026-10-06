@@ -657,25 +657,25 @@ function OurStory() {
       year: "2005",
       title: "First Meeting",
       body: "Their story began in 2005, when Aileen and Christian Jade first became classmates in the second grade. At that young age, Aileen already had her first little “puppy crush” on Jade, thanks in part to a dear friend who was also their classmate. What she didn’t know then was that the boy who became her childhood crush would one day become the love of her life.",
-      image: "/img/our-story.jpg",
+      image: "/img/1_meet.jpg",
     },
     {
       year: "2015 - 2019",
       title: "Four Years of Friendship",
       body: "Years later, fate brought them together again as college classmates. For four years, they shared the same classroom, creating memories and growing alongside each other. Their relationship remained purely casual and friendly throughout college, never imagining that something more was waiting just around the corner.",
-      image: "/img/4years.JPG",
+      image: "/img/4years_friendship.JPG",
     },
     {
       year: "2019",
       title: "Making It Official",
       body: "Just days after graduation, everything changed. In a romantic setup filled with candlelight and rose petals at the top of Bahia Mountain in Dewey Island, Negros, Christian Jade finally asked Aileen to be his girlfriend. After years of knowing each other—from childhood classmates to college friends—the timing finally felt right. And just like that, their love story truly began.",
-      image: "/img/makingofficial.jpg",
+      image: "/img/official.JPG",
     },
     {
       year: "2026",
       title: "The Proposal",
       body: "The day after they returned home from their Moalboal trip, an ordinary day at Aileen’s quiet home became one they would remember forever. With their beloved cat, Chaneyong, in his arms, Christian Jade got down on one knee and asked Aileen for her hand in marriage. In the comfort of their own home, surrounded by the simple familiarity of the life they had built together, he asked her to spend forever with him. And without hesitation, Aileen said yes.",
-      image: "/img/4everbegins.jpg",
+      image: "/img/the-proposal.jpg",
     },
   ]
 
@@ -708,14 +708,6 @@ function OurStory() {
               <div className="story-quote mb-6">
                 <p className="font-display italic text-[#4a3728] text-2xl md:text-3xl font-light leading-relaxed">
                   "Love is not just looking at each other, it's looking in the same direction."
-                </p>
-              </div>
-              <div className="mb-6 border-l border-[#d4b896] pl-4 text-left">
-                <p className="font-display italic text-[#4a3728] text-xl md:text-2xl font-light leading-relaxed">
-                  “A cord of three strands is not quickly broken.”
-                </p>
-                <p className="mt-2 font-body text-[10px] uppercase tracking-[0.25em] text-[#b89a6a]">
-                  Ecclesiastes 4:12
                 </p>
               </div>
               <p className="font-body text-[#7a5c48] leading-relaxed text-sm">
