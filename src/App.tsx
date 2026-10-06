@@ -1168,7 +1168,7 @@ function RSVP() {
     {
       question: "When should we RSVP by?",
       answer: [
-        "If we don't hear from you by then, we'll assume you're unable to attend so we can finalize our guest count. Thank you for understanding!",
+        "If we don’t hear from you by November 14, we’ll assume you’re unable to attend and will finalize our guest count accordingly. Thank you so much for understanding, and we hope to celebrate with you!",
       ],
     },
     {
@@ -1211,52 +1211,8 @@ function RSVP() {
         </div>
 
         <div className="grid gap-8 lg:grid-cols-2 lg:items-start">
-          <Reveal delay={120}>
-            <div className="faq-shell h-full">
-              <div className="faq-header">
-                <span className="faq-header-mark">❧</span>
-                <p className="faq-header-label">FAQ</p>
-              </div>
-
-              <div className="faq-list">
-                {faqs.map((faq, index) => {
-                  const isOpen = openFaq === index
-
-                  return (
-                    <div key={faq.question} className={`faq-item ${isOpen ? "is-open" : ""}`}>
-                      <button
-                        type="button"
-                        className="faq-trigger"
-                        onClick={() => setOpenFaq(isOpen ? null : index)}
-                        aria-expanded={isOpen}
-                      >
-                        <span className="faq-question-wrap">
-                          <span className="faq-badge" aria-hidden="true">✦</span>
-                          <span className="faq-question">{faq.question}</span>
-                        </span>
-                        <span className={`faq-icon ${isOpen ? "is-open" : ""}`} aria-hidden="true">
-                          <span className="faq-chevron" />
-                        </span>
-                      </button>
-
-                      <div className={`faq-content ${isOpen ? "is-open" : ""}`}>
-                        <div className="faq-content-inner">
-                          {faq.answer.map((paragraph) => (
-                            <p key={paragraph} className="faq-answer">
-                              {paragraph}
-                            </p>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  )
-                })}
-              </div>
-            </div>
-          </Reveal>
-
           {submitted ? (
-            <div className="text-center bg-[#faf6f0] border border-[#d4b896] py-16 px-8">
+            <div className="order-1 text-center bg-[#faf6f0] border border-[#d4b896] py-16 px-8 lg:order-2">
               <div className="mb-4 text-4xl text-[#b89a6a]">♡</div>
               <h3 className="mb-3 font-display text-3xl font-light italic text-[#4a3728]">
                 Thank you, {form.name}!
@@ -1270,7 +1226,7 @@ function RSVP() {
           ) : (
             <form
               onSubmit={handleSubmit}
-              className="space-y-8 border border-[#e8dfd4] bg-[#faf6f0] p-8 md:p-10"
+              className="order-1 space-y-8 border border-[#e8dfd4] bg-[#faf6f0] p-8 md:p-10 lg:order-2"
             >
               <div>
                 <label className={labelClass}>Search Your Name</label>
@@ -1387,6 +1343,50 @@ function RSVP() {
               </div>
             </form>
           )}
+
+          <Reveal delay={120} className="order-2 lg:order-1">
+            <div className="faq-shell h-full">
+              <div className="faq-header">
+                <span className="faq-header-mark">❧</span>
+                <p className="faq-header-label">FAQ</p>
+              </div>
+
+              <div className="faq-list">
+                {faqs.map((faq, index) => {
+                  const isOpen = openFaq === index
+
+                  return (
+                    <div key={faq.question} className={`faq-item ${isOpen ? "is-open" : ""}`}>
+                      <button
+                        type="button"
+                        className="faq-trigger"
+                        onClick={() => setOpenFaq(isOpen ? null : index)}
+                        aria-expanded={isOpen}
+                      >
+                        <span className="faq-question-wrap">
+                          <span className="faq-badge" aria-hidden="true">✦</span>
+                          <span className="faq-question">{faq.question}</span>
+                        </span>
+                        <span className={`faq-icon ${isOpen ? "is-open" : ""}`} aria-hidden="true">
+                          <span className="faq-chevron" />
+                        </span>
+                      </button>
+
+                      <div className={`faq-content ${isOpen ? "is-open" : ""}`}>
+                        <div className="faq-content-inner">
+                          {faq.answer.map((paragraph) => (
+                            <p key={paragraph} className="faq-answer">
+                              {paragraph}
+                            </p>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          </Reveal>
         </div>
       </div>
     </section>
@@ -1408,6 +1408,12 @@ function Footer() {
         <div className="flex-1 max-w-20 h-px bg-[#4a3728]/30" />
       </div>
       <p className="font-body text-xs text-[#4a3728]/40 tracking-widest">#AiLifetimew/Chris</p>
+      <p className="mt-5 font-display text-lg italic text-[#4a3728]/75">
+        “A cord of three strands is not quickly broken.”
+      </p>
+      <p className="mt-2 font-body text-[10px] uppercase tracking-[0.2em] text-[#4a3728]/55">
+        Ecclesiastes 4:12
+      </p>
     </footer>
   )
 }
