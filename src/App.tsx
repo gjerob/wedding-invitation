@@ -1061,7 +1061,7 @@ function RSVP() {
     {
       question: "When should we RSVP by?",
       answer: [
-        "If we don’t hear from you by November 14, we’ll assume you’re unable to attend and will finalize our guest count accordingly. Thank you so much for understanding, and we hope to celebrate with you!",
+        "If we don’t hear from you by December 20, we’ll assume you’re unable to attend and will finalize our guest count accordingly. Thank you so much for understanding, and we hope to celebrate with you!",
       ],
     },
     {
@@ -1099,7 +1099,7 @@ function RSVP() {
             <span className="text-lg text-[#b89a6a]">✦</span>
           </div>
           <p className="font-body text-sm leading-relaxed text-[#7a5c48]">
-            Please let us know by <strong className="font-medium text-[#4a3728]">November 14, 2026</strong> whether you'll be joining us for our special day.
+            Please let us know by <strong className="font-medium text-[#4a3728]">December 20, 2026</strong> whether you'll be joining us for our special day.
           </p>
         </div>
 
