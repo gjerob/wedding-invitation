@@ -279,16 +279,16 @@ function Hero() {
       </div>
 
       <div className="hero-fade relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f3e0be] drop-shadow-[0_2px_12px_rgba(255,214,140,0.25)]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#fbe7c0] drop-shadow-[0_0_18px_rgba(255,210,140,0.7),0_0_32px_rgba(255,210,140,0.45)]">
           Together with our families
         </p>
 
-        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-[#fffaf2] font-light leading-[0.9] drop-shadow-[0_4px_18px_rgba(26,17,12,0.22)] md:gap-x-3">
+        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-[#fffaf2] font-light leading-[0.9] drop-shadow-[0_0_20px_rgba(26,17,12,0.18)] md:gap-x-3">
           <span className="text-[2.8rem] italic sm:text-[3.6rem] md:text-[5.2rem] lg:text-[6.4rem]">
             Aileen &amp; Christian Jade
           </span>
         </h1>
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f3e0be] drop-shadow-[0_2px_12px_rgba(255,214,140,0.22)]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#fbe7c0] drop-shadow-[0_0_18px_rgba(255,210,140,0.65),0_0_30px_rgba(255,210,140,0.38)]">
           We invite you to celebrate
         </p>
         <div className="my-8 flex w-56 items-center gap-4">
