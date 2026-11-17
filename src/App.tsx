@@ -144,7 +144,7 @@ function Nav() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a
           href="#hero"
-          className="font-display text-xl italic tracking-wide text-[#f0d7b0] hover:text-[#f9e7ce] transition-colors"
+          className="font-display text-xl font-light italic tracking-[0.18em] text-[#f0d7b0] transition-colors hover:text-[#f9e7ce]"
         >
           A &amp; CJ
         </a>
@@ -261,73 +261,6 @@ function CountdownToForever({ light = false }: { light?: boolean }) {
   )
 }
 
-function MusicPlayer() {
-  const audioRef = useRef<HTMLAudioElement | null>(null)
-  const [isPlaying, setIsPlaying] = useState(false)
-
-  useEffect(() => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    const handlePlay = () => setIsPlaying(true)
-    const handlePause = () => setIsPlaying(false)
-
-    audio.volume = 0.25
-    audio.loop = true
-    audio.addEventListener("play", handlePlay)
-    audio.addEventListener("pause", handlePause)
-
-    return () => {
-      audio.removeEventListener("play", handlePlay)
-      audio.removeEventListener("pause", handlePause)
-    }
-  }, [])
-
-  const toggleMusic = async () => {
-    const audio = audioRef.current
-    if (!audio) return
-
-    if (audio.paused) {
-      try {
-        await audio.play()
-      } catch {
-        setIsPlaying(false)
-      }
-    } else {
-      audio.pause()
-    }
-  }
-
-  const handleAudioError = () => {
-    setIsPlaying(false)
-  }
-
-  return (
-    <div className="fixed bottom-5 right-5 z-50">
-      <audio
-        ref={audioRef}
-        preload="auto"
-        loop
-        src="/0926.wav"
-        onError={handleAudioError}
-      />
-
-      <button
-        type="button"
-        aria-label={isPlaying ? "Pause music" : "Play music"}
-        onClick={toggleMusic}
-        className={`music-toggle ${isPlaying ? "is-playing" : ""}`.trim()}
-      >
-        <span className="music-toggle-icon" aria-hidden="true">
-          <span className={`music-note ${isPlaying ? "is-playing" : "is-paused"}`}>
-            {isPlaying ? "♪" : "❚❚"}
-          </span>
-        </span>
-      </button>
-    </div>
-  )
-}
-
 function Hero() {
   return (
     <section
@@ -338,23 +271,24 @@ function Hero() {
         <img
           src="/img/hero-bg.jpg"
           alt="Couple walking on a beach in the Philippines"
-          className="hero-kenburns h-full w-full object-cover object-center"
+          className="hero-kenburns h-full w-full object-cover object-center brightness-105 saturate-100"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#2a1a0e]/30 via-[#3b2416]/20 to-[#1a0e06]/70" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,rgba(255,240,214,0.22),rgba(180,130,77,0.10)_24%,rgba(35,24,18,0.16)_52%,rgba(18,13,11,0.38)_100%)]" />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#f5efe7]/10 via-[#efe2d0]/10 to-[#1a120e]/45" />
         <div className="absolute bottom-0 left-0 right-0 h-40 bg-gradient-to-t from-[#faf6f0] to-transparent" />
       </div>
 
       <div className="hero-fade relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f1d8a8]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f3e0be] drop-shadow-[0_2px_12px_rgba(255,214,140,0.25)]">
           Together with our families
         </p>
 
-        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-white font-light leading-[0.9] md:gap-x-3">
+        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-[#fffaf2] font-light leading-[0.9] drop-shadow-[0_4px_18px_rgba(26,17,12,0.22)] md:gap-x-3">
           <span className="text-[2.8rem] italic sm:text-[3.6rem] md:text-[5.2rem] lg:text-[6.4rem]">
             Aileen &amp; Christian Jade
           </span>
         </h1>
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f1d8a8]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#f3e0be] drop-shadow-[0_2px_12px_rgba(255,214,140,0.22)]">
           We invite you to celebrate
         </p>
         <div className="my-8 flex w-56 items-center gap-4">
@@ -366,10 +300,10 @@ function Hero() {
         </div>
 
         <div className="text-center">
-          <p className="mb-1 font-display text-2xl font-light italic text-[#f7e7cb] md:text-3xl">
+          <p className="mb-1 font-display text-2xl font-light italic text-[#fffaf0] drop-shadow-[0_2px_10px_rgba(255,214,140,0.12)] md:text-3xl">
             March <span className="mx-1">•</span> 06 <span className="mx-1">•</span> 2027
           </p>
-          <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80">
+          <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)]">
             Tambis Road, JMPV Glad Subdivision,
             <br />
             Barangay Talungon, Bais City
@@ -379,13 +313,13 @@ function Hero() {
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
           <a
             href="#rsvp"
-            className="inline-block border border-[#f1d8a8]/80 bg-[#f1d8a8]/10 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#f1d8a8] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f1d8a8] hover:text-[#2a1a0e]"
+            className="inline-block border border-[#f6dca4]/80 bg-[#f4d79d]/10 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#fff5e0] shadow-[0_0_20px_rgba(244,215,157,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4d79d] hover:text-[#2a1a0e]"
           >
             RSVP
           </a>
           <a
             href="#story"
-            className="font-body text-[10px] uppercase tracking-[0.25em] text-white/75 transition-colors duration-300 hover:text-[#f1d8a8]"
+            className="font-body text-[10px] uppercase tracking-[0.25em] text-white/85 transition-colors duration-300 hover:text-[#f7dba5]"
           >
             Our Story
           </a>
@@ -1352,6 +1286,176 @@ function RSVP() {
   )
 }
 
+function PhotoAlbum() {
+  const photos = [
+    "/img/img-album/aileenandjade-1.jpg",
+    "/img/img-album/aileenandjade-2.jpg",
+    "/img/img-album/aileenandjade-3.jpg",
+    "/img/img-album/aileenandjade-4.jpg",
+    "/img/img-album/aileenandjade-5.jpg",
+    "/img/img-album/aileenandjade-6.jpg",
+    "/img/img-album/aileenandjade-7.jpg",
+    "/img/img-album/aileenandjade-8.jpg",
+    "/img/img-album/aileenandjade-9.jpg",
+    "/img/img-album/aileenandjade-10.jpg",
+    "/img/img-album/aileenandjade-11.jpg",
+    "/img/img-album/aileenandjade-12.jpg",
+    "/img/img-album/aileenandjade-13.jpg",
+    "/img/img-album/aileenandjade-14.jpg",
+    "/img/img-album/aileenandjade-15.jpg",
+    "/img/img-album/aileenandjade-16.jpg",
+    "/img/img-album/aileenandjade-17.jpg",
+    "/img/img-album/aileenandjade-18.jpg",
+    "/img/img-album/aileenandjade-19.jpg",
+    "/img/img-album/aileenandjade-20.jpg",
+    "/img/img-album/aileenandjade-21.jpg",
+    "/img/img-album/aileenandjade-22.jpg",
+    "/img/img-album/aileenandjade-23.jpg",
+    "/img/img-album/aileenandjade-24.jpg",
+    "/img/img-album/aileenandjade-25.jpg",
+    "/img/img-album/aileenandjade-26.jpg",
+    "/img/img-album/aileenandjade-27.jpg",
+    "/img/img-album/aileenandjade-28.jpg",
+    "/img/img-album/aileenandjade-29.jpg",
+    "/img/img-album/aileenandjade-30.jpg",
+    "/img/img-album/aileenandjade-31.jpg",
+    "/img/img-album/aileenandjade-32.jpg",
+    "/img/img-album/aileenandjade-33.jpg",
+    "/img/img-album/aileenandjade-34.jpg",
+    "/img/img-album/aileenandjade-35.jpg",
+    "/img/img-album/aileenandjade-36.jpg",
+    "/img/img-album/aileenandjade-37.jpg",
+    "/img/img-album/aileenandjade-38.jpg",
+    "/img/img-album/aileenandjade-39.jpg",
+    "/img/img-album/aileenandjade-40.jpg",
+    "/img/img-album/aileenandjade-41.jpg",
+  ]
+
+  const previewPhotos = photos.slice(0, 6)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+  const [touchStartX, setTouchStartX] = useState<number | null>(null)
+  const [touchDelta, setTouchDelta] = useState(0)
+
+  const closeViewer = () => setActiveIndex(null)
+
+  const goToNext = () => {
+    if (activeIndex === null) return
+    setActiveIndex((activeIndex + 1) % photos.length)
+  }
+
+  const goToPrev = () => {
+    if (activeIndex === null) return
+    setActiveIndex((activeIndex - 1 + photos.length) % photos.length)
+  }
+
+  const handleTouchStart = (event: React.TouchEvent<HTMLDivElement>) => {
+    setTouchStartX(event.touches[0].clientX)
+    setTouchDelta(0)
+  }
+
+  const handleTouchMove = (event: React.TouchEvent<HTMLDivElement>) => {
+    if (touchStartX === null) return
+    const nextDelta = event.touches[0].clientX - touchStartX
+    setTouchDelta(nextDelta)
+  }
+
+  const handleTouchEnd = () => {
+    if (activeIndex === null) return
+
+    if (touchDelta <= -60) {
+      goToNext()
+    } else if (touchDelta >= 60) {
+      goToPrev()
+    }
+
+    setTouchStartX(null)
+    setTouchDelta(0)
+  }
+
+  return (
+    <section id="album" className="bg-[#faf6f0] px-6 py-24">
+      <Reveal delay={90} className="block">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center">
+            <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
+              Our Moments
+            </p>
+            <h2 className="mb-6 font-display text-5xl font-light italic text-[#4a3728] md:text-6xl">
+              Photo Album
+            </h2>
+            <div className="divider-floral mx-auto w-48 justify-center">
+              <span className="text-lg text-[#b89a6a]">✦</span>
+            </div>
+          </div>
+
+          <div className="photo-grid">
+            {previewPhotos.map((photo, index) => (
+              <button
+                key={`${photo}-${index}`}
+                type="button"
+                className="photo-grid-item"
+                onClick={() => setActiveIndex(index)}
+                aria-label={`Open photo ${index + 1}`}
+              >
+                <img src={photo} alt={`Wedding memory ${index + 1}`} loading="lazy" />
+              </button>
+            ))}
+          </div>
+        </div>
+      </Reveal>
+
+      {activeIndex !== null ? (
+        <div className="photo-viewer-backdrop" onClick={closeViewer}>
+          <div
+            className="photo-viewer"
+            onClick={(event) => event.stopPropagation()}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+          >
+            <button
+              type="button"
+              aria-label="Close photo viewer"
+              className="photo-viewer-close"
+              onClick={closeViewer}
+            >
+              ×
+            </button>
+
+            <button
+              type="button"
+              aria-label="Previous photo"
+              className="photo-viewer-arrow photo-viewer-arrow-left"
+              onClick={goToPrev}
+            >
+              ‹
+            </button>
+
+            <div
+              className="photo-viewer-frame"
+              style={{
+                transform: `translateX(${touchDelta * 0.35}px) scale(${1 - Math.min(Math.abs(touchDelta) / 1200, 0.08)})`,
+                transition: touchStartX === null ? "transform 0.28s ease" : "none",
+              }}
+            >
+              <img src={photos[activeIndex]} alt={`Wedding memory ${activeIndex + 1}`} />
+            </div>
+
+            <button
+              type="button"
+              aria-label="Next photo"
+              className="photo-viewer-arrow photo-viewer-arrow-right"
+              onClick={goToNext}
+            >
+              ›
+            </button>
+          </div>
+        </div>
+      ) : null}
+    </section>
+  )
+}
+
 function Footer() {
   return (
     <footer className="bg-[#] text-[#4a3728] py-14 px-6 text-center">
@@ -1703,7 +1807,6 @@ export default function App() {
       ) : (
         <>
           <Nav />
-          <MusicPlayer />
           <Hero />
           <WeddingDetails />
           <OurStory />
@@ -1713,6 +1816,7 @@ export default function App() {
           <GuestPhotoUpload onUploadSuccess={() => setGalleryRefreshKey((value) => value + 1)} />
           <GuestGallery refreshKey={galleryRefreshKey} />
           <RSVP />
+          <PhotoAlbum />
           <Footer />
         </>
       )}
