@@ -279,7 +279,7 @@ function Hero() {
       </div>
 
       <div className="hero-fade relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#fbe7c0] drop-shadow-[0_0_18px_rgba(255,210,140,0.7),0_0_32px_rgba(255,210,140,0.45)]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#ffad16] drop-shadow-[0_0_18px_rgba(255,210,140,0.7),0_0_32px_rgba(255,210,140,0.45)]">
           Together with our families
         </p>
 
@@ -288,15 +288,15 @@ function Hero() {
             Aileen &amp; Christian Jade
           </span>
         </h1>
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#fbe7c0] drop-shadow-[0_0_18px_rgba(255,210,140,0.65),0_0_30px_rgba(255,210,140,0.38)]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#ffad16] drop-shadow-[0_0_18px_rgba(255,210,140,0.65),0_0_30px_rgba(255,210,140,0.38)]">
           We invite you to celebrate
         </p>
         <div className="my-8 flex w-56 items-center gap-4">
-          <div className="h-px flex-1 bg-[#f1d8a8]/70" />
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="#f1d8a8" opacity="0.9">
+          <div className="h-px flex-1 bg-[#ffad16]/70" />
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffad16" opacity="0.9">
             <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
           </svg>
-          <div className="h-px flex-1 bg-[#f1d8a8]/70" />
+          <div className="h-px flex-1 bg-[#ffad16]/70" />
         </div>
 
         <div className="text-center">
