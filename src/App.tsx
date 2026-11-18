@@ -144,21 +144,21 @@ function Nav() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         <a
           href="#hero"
-          className="font-display text-xl font-light italic tracking-[0.18em] text-[#f0d7b0] transition-colors hover:text-[#f9e7ce]"
+          className="font-display text-xl font-light italic tracking-[0.18em] text-[#0a2342] transition-colors hover:text-[#123d73]"
         >
           A &amp; CJ
         </a>
 
         <div className="hidden md:flex gap-8">
           {links.map((l) => (
-            <a key={l.label} href={l.href} className="nav-link text-[#f0d7b0] hover:text-[#f9e7ce]">
+            <a key={l.label} href={l.href} className="nav-link text-[#0a2342] hover:text-[#123d73]">
               {l.label}
             </a>
           ))}
         </div>
 
         <button
-          className="md:hidden text-[#b89a6a] hover:text-[#d4b896] transition-colors"
+          className="md:hidden text-[#0a2342] hover:text-[#123d73] transition-colors"
           onClick={() => setMenuOpen((v) => !v)}
           aria-label="Toggle menu"
         >
@@ -279,16 +279,16 @@ function Hero() {
       </div>
 
       <div className="hero-fade relative z-10 flex flex-col items-center text-center px-6 pt-24 pb-20">
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#ffad16] drop-shadow-[0_0_18px_rgba(255,210,140,0.7),0_0_32px_rgba(255,210,140,0.45)]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#0a2342] drop-shadow-[0_0_18px_rgba(255,210,140,0.7),0_0_32px_rgba(255,210,140,0.45)]">
           Together with our families
         </p>
 
-        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-[#fffaf2] font-light leading-[0.9] drop-shadow-[0_0_20px_rgba(26,17,12,0.18)] md:gap-x-3">
+        <h1 className="mb-4 flex flex-wrap items-center justify-center gap-x-2 font-display text-[#0a2342] font-light leading-[0.9] drop-shadow-[0_0_20px_rgba(26,17,12,0.18)] md:gap-x-3">
           <span className="text-[2.8rem] italic sm:text-[3.6rem] md:text-[5.2rem] lg:text-[6.4rem]">
             Aileen &amp; Christian Jade
           </span>
         </h1>
-        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#ffad16] drop-shadow-[0_0_18px_rgba(255,210,140,0.65),0_0_30px_rgba(255,210,140,0.38)]">
+        <p className="mb-6 font-body text-xs uppercase tracking-[0.35em] text-[#0a2342] drop-shadow-[0_0_18px_rgba(255,210,140,0.65),0_0_30px_rgba(255,210,140,0.38)]">
           We invite you to celebrate
         </p>
         <div className="my-8 flex w-56 items-center gap-4">
@@ -300,7 +300,7 @@ function Hero() {
         </div>
 
         <div className="text-center">
-          <p className="mb-1 font-display text-2xl font-light italic text-[#fffaf0] drop-shadow-[0_2px_10px_rgba(255,214,140,0.12)] md:text-3xl">
+          <p className="mb-1 font-display text-2xl font-light italic text-[#0a2342] drop-shadow-[0_2px_10px_rgba(255,214,140,0.12)] md:text-3xl">
             March <span className="mx-1">•</span> 06 <span className="mx-1">•</span> 2027
           </p>
           <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)]">
@@ -313,13 +313,13 @@ function Hero() {
         <div className="mt-10 flex flex-col items-center gap-4 sm:flex-row sm:gap-6">
           <a
             href="#rsvp"
-            className="inline-block border border-[#f6dca4]/80 bg-[#f4d79d]/10 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#fff5e0] shadow-[0_0_20px_rgba(244,215,157,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4d79d] hover:text-[#2a1a0e]"
+            className="inline-block border border-[#f6dca4]/80 bg-[#f4d79d]/10 px-8 py-3 font-body text-xs uppercase tracking-[0.25em] text-[#0a2342] shadow-[0_0_20px_rgba(244,215,157,0.12)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#f4d79d] hover:text-[#0a2342]"
           >
             RSVP
           </a>
           <a
             href="#story"
-            className="font-body text-[10px] uppercase tracking-[0.25em] text-white/85 transition-colors duration-300 hover:text-[#f7dba5]"
+            className="font-body text-[10px] uppercase tracking-[0.25em] text-[#0a2342] transition-colors duration-300 hover:text-[#123d73]"
           >
             Our Story
           </a>
@@ -842,7 +842,8 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
 
   useEffect(() => {
     const fetchPhotos = async () => {
-      if (!supabase) {
+      const client = supabase
+      if (!client) {
         setPhotos([])
         return
       }
@@ -851,7 +852,7 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
         setLoading(true)
         setError("")
 
-        const { data, error: listError } = await supabase.storage.from("guest-photos").list("", {
+        const { data, error: listError } = await client.storage.from("guest-photos").list("", {
           limit: 100,
           offset: 0,
           sortBy: { column: "created_at", order: "desc" },
@@ -863,7 +864,7 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
           .filter((item) => item.name && !item.name.startsWith("."))
           .map((item) => ({
             name: item.name,
-            url: supabase.storage.from("guest-photos").getPublicUrl(item.name).data.publicUrl,
+            url: client.storage.from("guest-photos").getPublicUrl(item.name).data.publicUrl,
           }))
 
         setPhotos(gallery)
@@ -963,6 +964,7 @@ const guestList = [
   "Mary Jane Cadayuna",
   "Melbert Barerra",
   "Nikki Densky",
+  "El Laicon Añana",
   "Paul Anthony Barrera",
   "Peter Paul Barerra",
   "Reggie Cabugnason",
@@ -1164,6 +1166,7 @@ function RSVP() {
                 <label className={labelClass}>Attendance</label>
                 <div className="mt-2 flex flex-col gap-2">
                   {[
+
                     { value: "attending", label: "Joyfully Attending" },
                     { value: "not-attending", label: "Regretfully Decline" },
                   ].map((opt) => (
@@ -1499,6 +1502,7 @@ function AdminPanel() {
     message: string | null
     created_at: string
   }>>([])
+
   const [loadingRsvps, setLoadingRsvps] = useState(false)
 
   useEffect(() => {
