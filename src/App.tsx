@@ -292,18 +292,18 @@ function Hero() {
           We invite you to celebrate
         </p>
         <div className="my-8 flex w-56 items-center gap-4">
-          <div className="h-px flex-1 bg-[#ffad16]/70" />
+          <div className="h-px flex-1 bg-[#0a2342]/70" />
           <svg width="18" height="18" viewBox="0 0 24 24" fill="#ffad16" opacity="0.9">
             <path d="M12 21.593c-5.63-5.539-11-10.297-11-14.402 0-3.791 3.068-5.191 5.281-5.191 1.312 0 4.151.501 5.719 4.457 1.59-3.968 4.464-4.447 5.726-4.447 2.54 0 5.274 1.621 5.274 5.181 0 4.069-5.136 8.625-11 14.402z" />
           </svg>
-          <div className="h-px flex-1 bg-[#ffad16]/70" />
+          <div className="h-px flex-1 bg-[#0a2342]/70" />
         </div>
 
         <div className="text-center">
-          <p className="mb-1 font-display text-2xl font-light italic text-[#0a2342] drop-shadow-[0_2px_10px_rgba(255,214,140,0.12)] md:text-3xl">
+          <p className="mb-1 font-display text-2xl font-light italic text-[#0a2342] drop-shadow-[0_0_10px_rgba(255,220,158,0.95),0_0_24px_rgba(255,191,92,0.75),0_3px_8px_rgba(32,20,10,0.38)] md:text-3xl">
             March <span className="mx-1">•</span> 06 <span className="mx-1">•</span> 2027
           </p>
-          <p className="font-body text-xs uppercase tracking-[0.25em] text-white/80 drop-shadow-[0_2px_10px_rgba(0,0,0,0.15)]">
+          <p className="font-body text-xs uppercase tracking-[0.25em] text-[#0a2342] drop-shadow-[0_0_8px_rgba(255,214,140,0.9),0_0_18px_rgba(255,187,73,0.65),0_2px_6px_rgba(20,12,7,0.9)]">
             Tambis Road, JMPV Glad Subdivision,
             <br />
             Barangay Talungon, Bais City
