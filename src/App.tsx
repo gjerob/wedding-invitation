@@ -1332,6 +1332,15 @@ function PhotoAlbum() {
     "/img/img-album/aileenandjade-39.jpg",
     "/img/img-album/aileenandjade-40.jpg",
     "/img/img-album/aileenandjade-41.jpg",
+    "/img/img-album/aileenandjade-42.jpg",
+    "/img/img-album/aileenandjade-43.jpg",
+    "/img/img-album/aileenandjade-44.jpg",
+    "/img/img-album/aileenandjade-45.jpg",
+    "/img/img-album/aileenandjade-46.jpg",
+    "/img/img-album/aileenandjade-47.jpg",
+    "/img/img-album/aileenandjade-48.jpg",
+    "/img/img-album/aileenandjade-49.jpg",
+    "/img/img-album/aileenandjade-50.jpg",
   ]
 
   const previewPhotos = photos.slice(0, 6)
