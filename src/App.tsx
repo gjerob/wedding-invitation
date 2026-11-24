@@ -895,10 +895,10 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
           </div>
         </div>
 
-        {!supabase ? (
-          <div className="border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
-            Connect Supabase to enable the guest photo gallery.
-          </div>
+        {/* Guest photo gallery temporarily hidden.
+        <div className="border border-[#d4b896] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
+          Connect Supabase to enable the guest photo gallery.
+        </div>
         ) : loading ? (
           <div className="border border-[#e8dfd4] bg-[#f2ebe0] p-8 text-center font-body text-sm text-[#7a5c48]">
             Loading photos...
@@ -917,7 +917,7 @@ function GuestGallery({ refreshKey = 0 }: { refreshKey?: number }) {
               </figure>
             ))}
           </div>
-        )}
+        )} */}
           </div>
         </Reveal>
     </section>
@@ -1826,8 +1826,24 @@ export default function App() {
           <StoryTransition />
           <OrderOfEvents />
           <DressCode />
-          <GuestPhotoUpload onUploadSuccess={() => setGalleryRefreshKey((value) => value + 1)} />
-          <GuestGallery refreshKey={galleryRefreshKey} />
+          <section className="bg-[#faf6f0] px-6 py-24">
+            <Reveal delay={90} className="block">
+              <div className="mx-auto max-w-4xl text-center">
+                <p className="mb-3 font-body text-xs uppercase tracking-[0.3em] text-[#b89a6a]">
+                  Shared Memories
+                </p>
+                <h2 className="mb-6 font-display text-5xl font-light italic text-[#4a3728] md:text-6xl">
+                  Wedding Day Photo Wall
+                </h2>
+                <div className="divider-floral mx-auto mb-8 w-48 justify-center">
+                  <span className="text-lg text-[#b89a6a]">✦</span>
+                </div>
+                <p className="mx-auto max-w-3xl font-body text-base leading-relaxed text-[#7a5c48] md:text-lg">
+                  Every moment is worth remembering! Share your photos and candid captures with us so we can relive our special day through your eyes. We’d love to see the memories you made and the little moments we might have missed!
+                </p>
+              </div>
+            </Reveal>
+          </section>
           <RSVP />
           <PhotoAlbum />
           <Footer />
